@@ -1,0 +1,171 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: ipify
+providerId: ipify
+created: '2026-05-29'
+modified: '2026-05-29'
+reconciled: false
+tags:
+  - IP Address
+  - Geolocation
+  - IP Intelligence
+  - Developer Tools
+description: >-
+  ipify operates two distinct commercial surfaces. The free public IP API
+  (api.ipify.org, api6.ipify.org, api64.ipify.org) is permanently free,
+  unauthenticated, and has no documented per-account quota. The IP Geolocation
+  API (geo.ipify.org), operated by WhoisXML API, uses credit-metered tiered
+  subscriptions — Free Trial, Basic, Advanced, Premium, and Custom. Each tier
+  bundles a monthly credit allocation; credits are consumed at 1 per Country
+  request, 2 per Country+City request, and 3 per Country+City+VPN request. The
+  Geolocation pricing page is JavaScript-rendered, so the dollar amounts and
+  monthly query counts captured here mirror WhoisXML API's standard tier
+  pricing as of generation; `reconciled` stays false until verified against the
+  live page.
+sources:
+  - https://www.ipify.org/
+  - https://geo.ipify.org/
+  - https://geo.ipify.org/pricing
+  - https://geo.ipify.org/docs
+plans:
+  - id: ipify-public-ip-free
+    name: Public IP API (Free)
+    type: freemium
+    description: >-
+      Free, unauthenticated public-IP lookup. No registration. No per-account
+      quota — the service is documented as usable "without limit, even if
+      you're doing millions of requests per minute."
+    entries:
+      - label: Public IP Lookups
+        name: public_ip_lookups
+        type: flat
+        metric: request
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '$0.00'
+        userMultiplied: false
+    elements:
+      - name: IPv4 endpoint (api.ipify.org)
+      - name: IPv6 endpoint (api6.ipify.org)
+      - name: Dual-stack endpoint (api64.ipify.org)
+      - name: Plain text, JSON, and JSONP response formats
+      - name: No authentication required
+      - name: No request logging
+      - name: Open source (MIT/Unlicense, github.com/rdegges/ipify-api)
+  - id: ipify-geolocation-free-trial
+    name: IP Geolocation Free Trial
+    type: freemium
+    description: >-
+      Sign-up free trial granting 1,000 credits at activation. No credit card
+      required. Country, Country+City, and Country+City+VPN endpoints all
+      available. Credits do not refresh — once spent, the account is gated to
+      a paid plan.
+    entries:
+      - label: Trial Credits
+        name: trial_credits
+        type: quota
+        metric: request
+        limit: 1000
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: '$0.00'
+        userMultiplied: false
+    elements:
+      - name: Country, Country+City, Country+City+VPN endpoints
+      - name: 1,000 one-time credits
+      - name: No credit card required
+      - name: 100 requests/second rate ceiling
+  - id: ipify-geolocation-basic
+    name: IP Geolocation Basic
+    type: subscription
+    description: >-
+      Entry-level paid tier. Monthly credit bundle suitable for low-volume
+      production lookups. Pricing reflects WhoisXML API's standard Basic tier
+      and is unverified — see the live pricing page for current rates.
+    entries:
+      - label: Monthly Credits
+        name: monthly_credits
+        type: subscription
+        metric: request
+        limit: 50000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$19.99'
+        userMultiplied: false
+    elements:
+      - name: Country, Country+City, Country+City+VPN endpoints
+      - name: 100 req/s rate ceiling
+      - name: API key authentication
+      - name: 24/5 email support
+  - id: ipify-geolocation-advanced
+    name: IP Geolocation Advanced
+    type: subscription
+    description: >-
+      Mid-tier paid plan with a larger monthly credit bundle. Pricing reflects
+      WhoisXML API's standard Advanced tier and is unverified.
+    entries:
+      - label: Monthly Credits
+        name: monthly_credits
+        type: subscription
+        metric: request
+        limit: 500000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$59.99'
+        userMultiplied: false
+    elements:
+      - name: All Geolocation endpoints
+      - name: 100 req/s rate ceiling
+      - name: API key authentication
+      - name: 24/5 email and chat support
+  - id: ipify-geolocation-premium
+    name: IP Geolocation Premium
+    type: subscription
+    description: >-
+      Highest published paid tier. Bulk monthly credit bundle for high-traffic
+      workloads. Pricing reflects WhoisXML API's standard Premium tier and is
+      unverified.
+    entries:
+      - label: Monthly Credits
+        name: monthly_credits
+        type: subscription
+        metric: request
+        limit: 2000000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '$129.99'
+        userMultiplied: false
+    elements:
+      - name: All Geolocation endpoints
+      - name: 100 req/s rate ceiling
+      - name: API key authentication
+      - name: Priority support
+  - id: ipify-geolocation-custom
+    name: IP Geolocation Custom / Enterprise
+    type: enterprise
+    description: >-
+      Negotiated enterprise plan for >Premium volumes, multiple keys, dedicated
+      SLAs, or on-premises feeds. Pricing is not published.
+    entries:
+      - label: Custom Credits
+        name: custom_credits
+        type: subscription
+        metric: request
+        limit: -1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: 'contact sales'
+        userMultiplied: false
+    elements:
+      - name: All Geolocation endpoints
+      - name: Negotiated SLAs and rate ceilings
+      - name: Multiple API keys
+      - name: Dedicated account management

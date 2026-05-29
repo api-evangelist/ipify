@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ipify/refs/heads/main/json-schema/ip-api-ip-response-schema.json",
+  "title": "IpResponse",
+  "description": "JSON-encoded public IP response from ipify.",
+  "type": "object",
+  "required": ["ip"],
+  "properties": {
+    "ip": {
+      "type": "string",
+      "description": "The caller's public IP address as an IPv4 or IPv6 literal.",
+      "example": "98.207.254.136"
+    }
+  }
+}

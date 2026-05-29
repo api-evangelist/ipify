@@ -1,0 +1,218 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "ipify"
+  description: >-
+    Unified vocabulary mapping ipify's two API surfaces — the free, unauthenticated
+    public IP API (api.ipify.org, api6.ipify.org, api64.ipify.org) and the paid,
+    credit-metered IP Geolocation API (geo.ipify.org, operated by WhoisXML API) —
+    into operational and capability dimensions.
+  created: "2026-05-29"
+  modified: "2026-05-29"
+
+operational:
+  apis:
+    - name: ipify Public IP Address API
+      namespace: ip-api
+      version: "1.0.0"
+      baseUrl: https://api.ipify.org
+      status: active
+    - name: ipify IP Geolocation API
+      namespace: geolocation-api
+      version: "2.0.0"
+      baseUrl: https://geo.ipify.org/api/v2
+      status: active
+
+  resources:
+    - name: ip
+      api: ip-api
+      actions: [getPublicIp]
+    - name: country
+      api: geolocation-api
+      actions: [getCountryLocation]
+    - name: country-city
+      api: geolocation-api
+      actions: [getCountryCityLocation]
+    - name: country-city-vpn
+      api: geolocation-api
+      actions: [getCountryCityVpnLocation]
+    - name: account-balance
+      api: geolocation-api
+      actions: [getAccountBalance]
+
+  actions:
+    - name: get
+      httpMethods: [GET]
+      pattern: read
+    - name: lookup
+      httpMethods: [GET]
+      pattern: query
+
+  schemas:
+    core:
+      - IpResponse
+      - GeolocationResponse
+      - GeolocationVpnResponse
+      - AccountBalanceResponse
+    location:
+      - Location
+      - AutonomousSystem
+    deprecated:
+      - ProxyBlock
+    error:
+      - ErrorResponse
+
+  parameters:
+    authentication:
+      - apiKey
+    identifiers:
+      - ipAddress
+      - domain
+      - email
+    options:
+      - reverseIp
+      - escapedUnicode
+      - format
+      - callback
+
+  enums:
+    formats:
+      - text
+      - json
+      - jsonp
+    surfaces:
+      - ipv4
+      - ipv6
+      - dual-stack
+    creditCosts:
+      - country=1
+      - country-city=2
+      - country-city-vpn=3
+    errorCodes:
+      - 400-bad-request
+      - 401-unauthorized
+      - 403-forbidden
+      - 422-unprocessable
+      - 429-rate-limited
+
+  authentication:
+    - scheme: none
+      apis: [ip-api]
+      notes: Public, unauthenticated. Same endpoint serves IPv4, IPv6, and dual-stack via different subdomains.
+    - scheme: apiKey
+      placement: query
+      keyName: apiKey
+      apis: [geolocation-api]
+      notes: Personal API key issued by WhoisXML API. Credit-metered per request.
+
+capability:
+  workflows:
+    - name: ip-api-ip-address
+      file: capabilities/ip-api-ip-address.yaml
+      description: Caller's-public-IP resolution surface (free, unauthenticated).
+      apis: [ip-api]
+      toolCount: 1
+      personas: [Cloud Provisioner, Browser Client, CLI User]
+      domains: [Network Identity]
+    - name: geolocation-api-geolocation
+      file: capabilities/geolocation-api-geolocation.yaml
+      description: Country, country+city, and country+city+VPN geolocation lookups for IPs, domains, and emails.
+      apis: [geolocation-api]
+      toolCount: 3
+      personas: [Fraud Analyst, Marketing Engineer, Security Operator]
+      domains: [IP Intelligence, Geolocation]
+    - name: geolocation-api-account
+      file: capabilities/geolocation-api-account.yaml
+      description: Remaining-credit balance check for the IP Geolocation API key.
+      apis: [geolocation-api]
+      toolCount: 1
+      personas: [FinOps Practitioner, Platform Operator]
+      domains: [Account Management]
+
+  personas:
+    - id: cloud-provisioner
+      name: Cloud Provisioner
+      description: Engineer wiring infrastructure that needs to learn its public egress IP.
+      workflows: [ip-api-ip-address]
+    - id: browser-client
+      name: Browser Client
+      description: JavaScript front-end fetching the visitor's IP via JSONP.
+      workflows: [ip-api-ip-address]
+    - id: cli-user
+      name: CLI User
+      description: Developer running `curl api.ipify.org` from a shell.
+      workflows: [ip-api-ip-address]
+    - id: fraud-analyst
+      name: Fraud Analyst
+      description: Reviewer geolocating suspicious traffic and ISPs.
+      workflows: [geolocation-api-geolocation]
+    - id: marketing-engineer
+      name: Marketing Engineer
+      description: Personalization engineer geotargeting content and ads.
+      workflows: [geolocation-api-geolocation]
+    - id: security-operator
+      name: Security Operator
+      description: SOC analyst checking AS, ISP, and reverse-DNS data for an IP.
+      workflows: [geolocation-api-geolocation]
+    - id: finops-practitioner
+      name: FinOps Practitioner
+      description: Owner monitoring credit burn-down on the Geolocation API key.
+      workflows: [geolocation-api-account]
+    - id: platform-operator
+      name: Platform Operator
+      description: Platform team alerting on low credit balances.
+      workflows: [geolocation-api-account]
+
+  domains:
+    - name: Network Identity
+      description: Surfaces that resolve the caller's own public IP.
+    - name: IP Intelligence
+      description: Surfaces that enrich an IP with ownership and routing metadata.
+    - name: Geolocation
+      description: Surfaces that resolve an IP to a place on Earth.
+    - name: Account Management
+      description: Surfaces that report on the API key itself (credit balance, usage).
+
+  namespaces:
+    - consumed: ip-api-ip-address
+      rest: ip-api-ip-address-rest
+      mcp: ip-api-ip-address-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: geolocation-api-geolocation
+      rest: geolocation-api-geolocation-rest
+      mcp: geolocation-api-geolocation-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: geolocation-api-account
+      rest: geolocation-api-account-rest
+      mcp: geolocation-api-account-mcp
+      restPort: 8080
+      mcpPort: 9090
+
+  binds:
+    - env: IPIFY_API_KEY
+      description: API key for the ipify IP Geolocation product (issued by WhoisXML API).
+      workflows: [geolocation-api-geolocation, geolocation-api-account]
+
+crossReference:
+  - resource: ip
+    operations: [getPublicIp]
+    workflows: [ip-api-ip-address]
+    personas: [Cloud Provisioner, Browser Client, CLI User]
+  - resource: country
+    operations: [getCountryLocation]
+    workflows: [geolocation-api-geolocation]
+    personas: [Fraud Analyst, Marketing Engineer, Security Operator]
+  - resource: country-city
+    operations: [getCountryCityLocation]
+    workflows: [geolocation-api-geolocation]
+    personas: [Fraud Analyst, Marketing Engineer, Security Operator]
+  - resource: country-city-vpn
+    operations: [getCountryCityVpnLocation]
+    workflows: [geolocation-api-geolocation]
+    personas: [Security Operator]
+  - resource: account-balance
+    operations: [getAccountBalance]
+    workflows: [geolocation-api-account]
+    personas: [FinOps Practitioner, Platform Operator]

@@ -1,0 +1,112 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: ipify
+providerId: ipify
+created: '2026-05-29'
+modified: '2026-05-29'
+reconciled: false
+tags:
+  - FinOps
+  - FOCUS
+  - IP Intelligence
+  - Geolocation
+description: >-
+  FOCUS-aligned FinOps for ipify: the free Public IP API is zero-cost and out
+  of scope for FinOps; the paid IP Geolocation API (operated by WhoisXML API)
+  bills on monthly subscription tiers where each request consumes 1–3 credits
+  from the plan's monthly allotment.
+sources:
+  - https://www.ipify.org/
+  - https://geo.ipify.org/
+  - https://geo.ipify.org/pricing
+  - https://geo.ipify.org/docs
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: WhoisXML API, Inc.
+serviceCategory: IP Intelligence + Geolocation
+billingModel:
+  pricingCategory: Tiered Subscription
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Refund
+focusColumns:
+  ServiceName: ipify
+  ServiceCategory: IP Intelligence
+  ServiceSubcategory: IP Geolocation
+  ProviderName: ipify
+  PublisherName: WhoisXML API, Inc.
+  InvoiceIssuerName: WhoisXML API, Inc.
+  BillingCurrency: USD
+  ChargeCategory: Usage
+meters:
+  - name: geolocation_credits
+    unit: credit
+    aggregation: sum
+    dimensions:
+      - endpoint
+      - api_key
+      - month
+  - name: geolocation_requests
+    unit: request
+    aggregation: count
+    dimensions:
+      - endpoint
+      - status_code
+      - api_key
+  - name: country_requests
+    unit: request
+    aggregation: count
+    dimensions:
+      - api_key
+  - name: country_city_requests
+    unit: request
+    aggregation: count
+    dimensions:
+      - api_key
+  - name: country_city_vpn_requests
+    unit: request
+    aggregation: count
+    dimensions:
+      - api_key
+  - name: monthly_subscription_seats
+    unit: seat
+    aggregation: max
+    dimensions:
+      - plan_tier
+  - name: public_ip_requests
+    unit: request
+    aggregation: count
+    dimensions: []
+principles:
+  - name: Visibility
+    description: >-
+      Pull credit-burn telemetry from the Geolocation `/service/account-
+      balance` endpoint on a schedule (e.g. hourly) and chart remaining
+      credits against the plan's monthly allotment. The free Public IP API
+      requires no telemetry — it carries no cost.
+  - name: Allocation
+    description: >-
+      Issue separate API keys per workload (production, staging, batch
+      enrichment) so credit consumption can be attributed back to a team or
+      product without manual tagging.
+  - name: Optimization
+    description: >-
+      Cache Geolocation lookups by IP address in your application layer —
+      results are stable on the order of hours to days. Prefer the cheapest
+      endpoint that satisfies the use case (Country = 1 credit before
+      reaching for Country+City = 2). Avoid the deprecated Country+City+VPN
+      endpoint (3 credits) since the `proxy` block always returns false.
+  - name: Accountability
+    description: >-
+      Set alert thresholds (e.g. 75%, 90%) against the plan's monthly credit
+      allotment. Page the workflow owner before exhaustion so the team can
+      either throttle the workload or top up the plan rather than failing
+      lookups with HTTP 403.

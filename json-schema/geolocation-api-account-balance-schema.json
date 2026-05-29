@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ipify/refs/heads/main/json-schema/geolocation-api-account-balance-schema.json",
+  "title": "AccountBalanceResponse",
+  "description": "Remaining credit balance for the API key.",
+  "type": "object",
+  "properties": {
+    "credits": {
+      "type": "integer",
+      "description": "Remaining credits available for IP Geolocation requests.",
+      "example": 9876
+    }
+  }
+}

@@ -1,32 +1,179 @@
 aid: ipify
-name: IPify
-description: "A simple IP Address API"
+name: ipify
+description: >-
+  ipify operates two complementary IP APIs. The free Public IP Address API
+  (api.ipify.org, api6.ipify.org, api64.ipify.org) returns the caller's public
+  IPv4, IPv6, or dual-stack address as plain text, JSON, or JSONP — with no
+  authentication, no rate limit, and no logging. The paid IP Geolocation API
+  (geo.ipify.org), operated by WhoisXML API, resolves an IP, domain, or email
+  to a country/region/city, ISP, and Autonomous System (ASN) profile using
+  credit-metered subscription plans.
 url: https://www.ipify.org/
 specificationVersion: '0.20'
 created: '2026-05-28'
-modified: '2026-05-28'
+modified: '2026-05-29'
 x-source: public-apis/public-apis
-x-category: "Development"
+x-category: Development
 x-tier: 3
 x-tier-reason: bulk-registered-from-public-apis
 tags:
   - Development
+  - IP Address
+  - Geolocation
+  - IP Intelligence
   - Public APIs
 apis:
-  - name: IPify
-    description: "A simple IP Address API"
+  - name: ipify Public IP Address API
+    description: >-
+      Free, unauthenticated, unlimited public IP address lookup. Returns the
+      caller's IPv4 (api.ipify.org), IPv6 (api6.ipify.org), or dual-stack
+      (api64.ipify.org) address as plain text, JSON, or JSONP.
     humanURL: https://www.ipify.org/
-    baseURL: https://www.ipify.org/
+    baseURL: https://api.ipify.org
     tags:
+      - IP Address
+      - Public IP
       - Development
     properties:
       - type: Documentation
         url: https://www.ipify.org/
+      - type: OpenAPI
+        url: openapi/ipify-ip-api.yml
+      - type: JSONSchema
+        url: json-schema/ip-api-ip-response-schema.json
+      - type: JSONStructure
+        url: json-structure/ip-api-ip-response-structure.json
+      - type: Example
+        url: examples/ip-api-ip-response-example.json
+      - type: NaftikoCapability
+        url: capabilities/ip-api-ip-address.yaml
+      - type: SourceCode
+        title: ipify-api (Go server)
+        url: https://github.com/rdegges/ipify-api
+      - type: SDK
+        title: Python SDK
+        url: https://github.com/rdegges/python-ipify
+      - type: SDK
+        title: Go SDK
+        url: https://github.com/rdegges/go-ipify
+  - name: ipify IP Geolocation API
+    description: >-
+      Paid, credit-metered IP geolocation API operated by WhoisXML API.
+      Resolves an IP, domain, or email to country/region/city, ISP, and AS
+      (ASN) profile. Country (1 credit), Country+City (2 credits), and
+      deprecated Country+City+VPN (3 credits) tiers. Authentication via
+      `apiKey` query parameter.
+    humanURL: https://geo.ipify.org/
+    baseURL: https://geo.ipify.org/api/v2
+    tags:
+      - Geolocation
+      - IP Intelligence
+      - ASN
+    properties:
+      - type: Documentation
+        url: https://geo.ipify.org/docs
+      - type: APIReference
+        url: https://geo.ipify.org/docs
+      - type: OpenAPI
+        url: openapi/ipify-geolocation-api.yml
+      - type: JSONSchema
+        title: Geolocation Response Schema
+        url: json-schema/geolocation-api-geolocation-response-schema.json
+      - type: JSONSchema
+        title: Account Balance Schema
+        url: json-schema/geolocation-api-account-balance-schema.json
+      - type: JSONStructure
+        title: Geolocation Response Structure
+        url: json-structure/geolocation-api-geolocation-response-structure.json
+      - type: JSONStructure
+        title: Account Balance Structure
+        url: json-structure/geolocation-api-account-balance-structure.json
+      - type: Example
+        title: Geolocation Response Example
+        url: examples/geolocation-api-geolocation-response-example.json
+      - type: Example
+        title: Account Balance Example
+        url: examples/geolocation-api-account-balance-example.json
+      - type: NaftikoCapability
+        url: capabilities/geolocation-api-geolocation.yaml
+      - type: NaftikoCapability
+        url: capabilities/geolocation-api-account.yaml
+      - type: Pricing
+        url: https://geo.ipify.org/pricing
+      - type: Authentication
+        url: https://geo.ipify.org/docs
 common:
   - type: Website
     url: https://www.ipify.org/
   - type: PublicAPIsListing
     url: https://github.com/public-apis/public-apis
+  - type: GitHubRepository
+    title: ipify-api (server)
+    url: https://github.com/rdegges/ipify-api
+  - type: GitHubRepository
+    title: python-ipify
+    url: https://github.com/rdegges/python-ipify
+  - type: GitHubRepository
+    title: go-ipify
+    url: https://github.com/rdegges/go-ipify
+  - type: JSON-LD
+    url: json-ld/ipify-context.jsonld
+  - type: SpectralRules
+    url: rules/ipify-rules.yml
+  - type: Vocabulary
+    url: vocabulary/ipify-vocabulary.yml
+  - type: Plans
+    url: plans/ipify-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/ipify-rate-limits.yml
+  - type: FinOps
+    url: finops/ipify-finops.yml
+  - type: Features
+    data:
+      - name: Public IP Lookup
+        description: Return the caller's public IPv4, IPv6, or dual-stack address with zero authentication.
+      - name: Multi-Format Response
+        description: Plain text, JSON, or JSONP — pick what the client speaks natively.
+      - name: Credit-Metered Geolocation
+        description: Resolve IP, domain, or email to country/region/city, ISP, and ASN.
+      - name: Reverse DNS Lookup
+        description: Optionally return up to five reverse-DNS associated domains for an IP.
+      - name: Account Balance Endpoint
+        description: Query remaining credits on the API key in real time.
+      - name: 100 req/s Rate Ceiling
+        description: Hard 100 requests/second per API key on the Geolocation API.
+      - name: Open Source Server
+        description: The free public IP server is MIT/Unlicense-licensed Go (github.com/rdegges/ipify-api).
+  - type: UseCases
+    data:
+      - name: Cloud Server Provisioning
+        description: Bootstrapping cloud instances that need to know their own egress IP.
+      - name: Firewall Tunneling Setup
+        description: Configuring SSH/VPN tunnels that need the client's current public IP.
+      - name: Geotargeted Content
+        description: Personalize banners, currency, or language based on visitor country/city.
+      - name: Fraud Detection
+        description: Flag suspicious traffic by ASN, ISP, or geographic mismatch.
+      - name: Compliance Geofencing
+        description: Block or restrict access from disallowed regions or countries.
+      - name: Bot and Scraping Defense
+        description: Cross-reference IP origin with AS classification (Hosting vs ISP) for traffic scoring.
+  - type: Integrations
+    data:
+      - name: WhoisXML API
+        description: Geolocation product line is part of WhoisXML API's broader IP/DNS intelligence catalog.
+      - name: Heroku
+        description: Public IP API server (rdegges/ipify-api) is deployed on Heroku.
+      - name: 20+ Community Client Libraries
+        description: Bash, C, Clojurescript, Crystal, Dart, Elixir, Go, Java, Kotlin, .NET, Node.js, Objective-C, PHP, Python, R, Rust, Swift, Xojo, and more.
+  - type: Solutions
+    data:
+      - name: Free Public IP Lookup
+        description: Drop-in HTTP call to api.ipify.org with no signup. Best for client-side IP discovery.
+      - name: Server-Side IP Geolocation
+        description: Credit-metered Geolocation API for backend enrichment of inbound traffic.
+      - name: Reverse IP Enrichment
+        description: Geolocation API with `reverseIp=1` for associating an IP with up to five domains.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

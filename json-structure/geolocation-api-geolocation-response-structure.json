@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ipify/refs/heads/main/json-structure/geolocation-api-geolocation-response-structure.json",
+  "name": "GeolocationResponse",
+  "description": "Geolocation, ISP, and AS lookup result for an IP, domain, or email.",
+  "type": "object",
+  "required": ["ip", "location"],
+  "properties": {
+    "ip": {"type": "string", "description": "The resolved IPv4 or IPv6 address."},
+    "isp": {"type": "string", "description": "Name of the Internet Service Provider that owns the IP."},
+    "location": {
+      "type": "object",
+      "description": "Country + region + city + postal code + lat/lng + timezone block.",
+      "properties": {
+        "country": {"type": "string", "description": "ISO 3166-1 alpha-2 country code."},
+        "region": {"type": "string", "description": "Region, state, or province name."},
+        "city": {"type": "string", "description": "City name (Country+City plans only)."},
+        "lat": {"type": "double", "description": "Latitude in decimal degrees."},
+        "lng": {"type": "double", "description": "Longitude in decimal degrees."},
+        "postalCode": {"type": "string", "description": "Postal code for the location."},
+        "timezone": {"type": "string", "description": "UTC offset for the location."},
+        "geonameId": {"type": "int64", "description": "GeoNames database identifier."}
+      }
+    },
+    "as": {
+      "type": "object",
+      "description": "Autonomous System profile for the IP.",
+      "properties": {
+        "asn": {"type": "int64", "description": "Autonomous System Number."},
+        "name": {"type": "string", "description": "AS organization name."},
+        "route": {"type": "string", "description": "Announced route in CIDR notation."},
+        "domain": {"type": "uri", "description": "AS organization website."},
+        "type": {"type": "string", "description": "AS classification."}
+      }
+    },
+    "domains": {
+      "type": "array",
+      "description": "Up to five reverse-DNS associated domains (only when reverseIp=1).",
+      "items": {"type": "string"}
+    }
+  }
+}

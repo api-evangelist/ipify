@@ -1,0 +1,90 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "ipify": "https://www.ipify.org/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "IpResponse": "ipify:IpResponse",
+    "GeolocationResponse": "ipify:GeolocationResponse",
+    "Location": "ipify:Location",
+    "AutonomousSystem": "ipify:AutonomousSystem",
+    "AccountBalanceResponse": "ipify:AccountBalanceResponse",
+
+    "ip": {
+      "@id": "ipify:ip",
+      "@type": "xsd:string"
+    },
+    "isp": {
+      "@id": "ipify:isp",
+      "@type": "xsd:string"
+    },
+    "location": {
+      "@id": "ipify:location",
+      "@type": "@id"
+    },
+    "country": {
+      "@id": "ipify:country",
+      "@type": "xsd:string"
+    },
+    "region": {
+      "@id": "ipify:region",
+      "@type": "xsd:string"
+    },
+    "city": {
+      "@id": "ipify:city",
+      "@type": "xsd:string"
+    },
+    "lat": {
+      "@id": "schema:latitude",
+      "@type": "xsd:double"
+    },
+    "lng": {
+      "@id": "schema:longitude",
+      "@type": "xsd:double"
+    },
+    "postalCode": {
+      "@id": "schema:postalCode",
+      "@type": "xsd:string"
+    },
+    "timezone": {
+      "@id": "ipify:timezone",
+      "@type": "xsd:string"
+    },
+    "geonameId": {
+      "@id": "ipify:geoname_id",
+      "@type": "xsd:integer"
+    },
+    "as": {
+      "@id": "ipify:as",
+      "@type": "@id"
+    },
+    "asn": {
+      "@id": "ipify:asn",
+      "@type": "xsd:integer"
+    },
+    "name": "schema:name",
+    "route": {
+      "@id": "ipify:route",
+      "@type": "xsd:string"
+    },
+    "domain": {
+      "@id": "ipify:domain",
+      "@type": "@id"
+    },
+    "type": {
+      "@id": "ipify:type",
+      "@type": "xsd:string"
+    },
+    "domains": {
+      "@id": "ipify:domains",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "credits": {
+      "@id": "ipify:credits",
+      "@type": "xsd:integer"
+    }
+  }
+}

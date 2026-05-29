@@ -1,0 +1,86 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: ipify
+providerId: ipify
+created: '2026-05-29'
+modified: '2026-05-29'
+reconciled: true
+tags:
+  - Rate Limiting
+  - IP Address
+  - Geolocation
+description: >-
+  ipify operates two surfaces with very different rate-limit postures. The free
+  public IP API (api.ipify.org, api6.ipify.org, api64.ipify.org) is explicitly
+  documented as having no rate limit — the homepage says "you can use it
+  without limit, even if you're doing millions of requests per minute." The
+  paid IP Geolocation API (geo.ipify.org) enforces a hard 100-requests-per-
+  second ceiling per API key plus the monthly credit quota of the active plan.
+  All limits are per API key (paid) or per IP and global infrastructure (free).
+sources:
+  - https://www.ipify.org/
+  - https://geo.ipify.org/docs
+responseCodes:
+  throttled: 429
+  quotaExceeded: 403
+  serverError: 500
+limits:
+  - name: Public IP API requests
+    scope: global
+    metric: requests_per_second
+    limit: 'unlimited (documented as no limit, including millions of requests per minute)'
+    notes: >-
+      api.ipify.org, api6.ipify.org, and api64.ipify.org do not enforce a
+      published per-IP or per-account rate limit. Use polite client behavior
+      (caching, exponential back-off on transient errors).
+  - name: Geolocation API request rate
+    scope: key
+    metric: requests_per_second
+    limit: 100
+    timeFrame: second
+    notes: >-
+      Hard 100 req/s ceiling per API key. Exceeding it returns HTTP 429.
+      Distribute load across multiple keys for higher throughput.
+  - name: Geolocation API monthly credits
+    scope: key
+    metric: requests_per_month
+    limit: 'per-plan monthly credit allotment (see plans/ipify-plans-pricing.yml)'
+    notes: >-
+      Country = 1 credit, Country+City = 2 credits, Country+City+VPN = 3
+      credits per successful request. Free Trial grants 1,000 one-time
+      credits at signup; paid plans grant a monthly bundle.
+  - name: Geolocation API account balance check
+    scope: key
+    metric: requests_per_second
+    limit: 100
+    timeFrame: second
+    notes: >-
+      `/service/account-balance` shares the same 100 req/s ceiling as the
+      Geolocation endpoints.
+policies:
+  - name: Public IP — no logging, no auth, no quota
+    description: >-
+      The public IP API enforces no authentication and no per-account quota.
+      ipify states "no visitor information is ever logged." Client-side
+      caching is still encouraged to reduce upstream load.
+  - name: Geolocation — 100 req/s per key
+    description: >-
+      The Geolocation API caps each API key at 100 requests per second. The
+      ceiling is hard — there is no published mechanism to raise it short of
+      acquiring additional keys.
+  - name: Geolocation — credit-metered quota
+    description: >-
+      Monthly credit quota is the primary commercial throttle. Country = 1,
+      Country+City = 2, Country+City+VPN = 3. Out-of-credit responses return
+      HTTP 403; rate-ceiling responses return HTTP 429.
+  - name: Retry behavior
+    description: >-
+      On 429, back off using exponential delay (e.g. 100 ms, 200 ms, 400 ms)
+      with jitter. On 5xx, retry idempotent GETs up to 3 times. On 403 with
+      "insufficient credits", do not retry — top up the plan.
+  - name: Recommended caching
+    description: >-
+      Geolocation results for the same IP are stable on the order of hours
+      to days. Cache lookups in your application layer and key the cache by
+      IP + endpoint (country / country-city / country-city-vpn).

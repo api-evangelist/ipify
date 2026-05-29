@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/ipify/refs/heads/main/json-schema/geolocation-api-geolocation-response-schema.json",
+  "title": "GeolocationResponse",
+  "description": "Geolocation, ISP, and AS lookup result for an IP, domain, or email.",
+  "type": "object",
+  "required": ["ip", "location"],
+  "properties": {
+    "ip": {
+      "type": "string",
+      "description": "The resolved IPv4 or IPv6 address the result describes.",
+      "example": "8.8.8.8"
+    },
+    "isp": {
+      "type": "string",
+      "description": "Name of the Internet Service Provider that owns the IP.",
+      "example": "Google LLC"
+    },
+    "location": {
+      "type": "object",
+      "description": "Country + region + city + postal code + lat/lng + timezone block.",
+      "properties": {
+        "country": {"type": "string", "description": "ISO 3166-1 alpha-2 country code.", "example": "US"},
+        "region": {"type": "string", "description": "Region, state, or province name.", "example": "California"},
+        "city": {"type": "string", "description": "City name (Country+City plans only).", "example": "Mountain View"},
+        "lat": {"type": "number", "description": "Latitude in decimal degrees.", "example": 37.40599},
+        "lng": {"type": "number", "description": "Longitude in decimal degrees.", "example": -122.078514},
+        "postalCode": {"type": "string", "description": "Postal code for the location.", "example": "94043"},
+        "timezone": {"type": "string", "description": "UTC offset for the location, formatted like +10:00.", "example": "-07:00"},
+        "geonameId": {"type": "integer", "description": "GeoNames database identifier.", "example": 5375480}
+      }
+    },
+    "as": {
+      "type": "object",
+      "description": "Autonomous System profile for the IP.",
+      "properties": {
+        "asn": {"type": "integer", "description": "Autonomous System Number.", "example": 15169},
+        "name": {"type": "string", "description": "AS organization name.", "example": "GOOGLE"},
+        "route": {"type": "string", "description": "Announced route in CIDR notation.", "example": "8.8.8.0/24"},
+        "domain": {"type": "string", "description": "AS organization website.", "example": "https://about.google/"},
+        "type": {"type": "string", "description": "AS classification (Content, Hosting, ISP, ...).", "example": "Content"}
+      }
+    },
+    "domains": {
+      "type": "array",
+      "description": "Up to five reverse-DNS associated domains (only when reverseIp=1).",
+      "items": {"type": "string"},
+      "example": ["dns.google", "8.8.8.8.in-addr.arpa"]
+    }
+  }
+}
