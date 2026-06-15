@@ -1,0 +1,216 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ipify IP Geolocation API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Geolocation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ipify Get Country-Level Geolocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://geo.ipify.org/api/v2/country",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "at_DEMO_KEY_REDACTED",
+                "type": "query",
+                "description": "Personal API key for the ipify Geolocation product."
+              },
+              {
+                "name": "ipAddress",
+                "value": "8.8.8.8",
+                "type": "query",
+                "description": "IPv4 or IPv6 address to look up. Defaults to the requester's IP when omitted and no `domain`/`email` is supplied."
+              },
+              {
+                "name": "domain",
+                "value": "example.com",
+                "type": "query",
+                "description": "Domain name whose A/AAAA record should be resolved and looked up."
+              },
+              {
+                "name": "email",
+                "value": "user@example.com",
+                "type": "query",
+                "description": "Email address whose MX server IP should be looked up."
+              },
+              {
+                "name": "reverseIp",
+                "value": "1",
+                "type": "query",
+                "description": "When `1`, include up to five reverse-DNS associated domains in the response."
+              },
+              {
+                "name": "escapedUnicode",
+                "value": "0",
+                "type": "query",
+                "description": "When `1`, leave Unicode characters in escaped form rather than decoding them."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "apiKey",
+              "value": "{{apiKey}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Look up an IP, domain, or email and return its country-level geolocation and ISP. Costs 1 credit per successful request."
+        },
+        {
+          "info": {
+            "name": "ipify Get Country and City Geolocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://geo.ipify.org/api/v2/country,city",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "at_DEMO_KEY_REDACTED",
+                "type": "query",
+                "description": "Personal API key for the ipify Geolocation product."
+              },
+              {
+                "name": "ipAddress",
+                "value": "8.8.8.8",
+                "type": "query",
+                "description": "IPv4 or IPv6 address to look up. Defaults to the requester's IP when omitted and no `domain`/`email` is supplied."
+              },
+              {
+                "name": "domain",
+                "value": "example.com",
+                "type": "query",
+                "description": "Domain name whose A/AAAA record should be resolved and looked up."
+              },
+              {
+                "name": "email",
+                "value": "user@example.com",
+                "type": "query",
+                "description": "Email address whose MX server IP should be looked up."
+              },
+              {
+                "name": "reverseIp",
+                "value": "1",
+                "type": "query",
+                "description": "When `1`, include up to five reverse-DNS associated domains in the response."
+              },
+              {
+                "name": "escapedUnicode",
+                "value": "0",
+                "type": "query",
+                "description": "When `1`, leave Unicode characters in escaped form rather than decoding them."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "apiKey",
+              "value": "{{apiKey}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Look up an IP, domain, or email and return its full geolocation (country + region + city + postal code + lat/lng + timezone) plus ISP and AS details. Costs 2 credits per successful request."
+        },
+        {
+          "info": {
+            "name": "ipify Get Country, City, and VPN Geolocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://geo.ipify.org/api/v2/country,city,vpn",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "at_DEMO_KEY_REDACTED",
+                "type": "query",
+                "description": "Personal API key for the ipify Geolocation product."
+              },
+              {
+                "name": "ipAddress",
+                "value": "8.8.8.8",
+                "type": "query",
+                "description": "IPv4 or IPv6 address to look up. Defaults to the requester's IP when omitted and no `domain`/`email` is supplied."
+              },
+              {
+                "name": "domain",
+                "value": "example.com",
+                "type": "query",
+                "description": "Domain name whose A/AAAA record should be resolved and looked up."
+              },
+              {
+                "name": "email",
+                "value": "user@example.com",
+                "type": "query",
+                "description": "Email address whose MX server IP should be looked up."
+              },
+              {
+                "name": "reverseIp",
+                "value": "1",
+                "type": "query",
+                "description": "When `1`, include up to five reverse-DNS associated domains in the response."
+              },
+              {
+                "name": "escapedUnicode",
+                "value": "0",
+                "type": "query",
+                "description": "When `1`, leave Unicode characters in escaped form rather than decoding them."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "apiKey",
+              "value": "{{apiKey}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Look up an IP, domain, or email and return full geolocation, ISP, AS, and a VPN/proxy-detection block. The `proxy` field is deprecated and always returns `false`. Costs 3 credits per successful request."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Account",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ipify Get Account Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://geo.ipify.org/api/v2/service/account-balance",
+            "params": [
+              {
+                "name": "apiKey",
+                "value": "at_DEMO_KEY_REDACTED",
+                "type": "query",
+                "description": "Personal API key for the ipify Geolocation product."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "apiKey",
+              "value": "{{apiKey}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Return the remaining credit balance on the API key for the IP Geolocation product line."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

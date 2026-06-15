@@ -1,12 +1,10 @@
 aid: ipify
 name: ipify
 description: >-
-  ipify operates two complementary IP APIs. The free Public IP Address API
-  (api.ipify.org, api6.ipify.org, api64.ipify.org) returns the caller's public
-  IPv4, IPv6, or dual-stack address as plain text, JSON, or JSONP — with no
-  authentication, no rate limit, and no logging. The paid IP Geolocation API
-  (geo.ipify.org), operated by WhoisXML API, resolves an IP, domain, or email
-  to a country/region/city, ISP, and Autonomous System (ASN) profile using
+  ipify operates two complementary IP APIs. The free Public IP Address API (api.ipify.org, api6.ipify.org,
+  api64.ipify.org) returns the caller's public IPv4, IPv6, or dual-stack address as plain text, JSON, or JSONP — with no
+  authentication, no rate limit, and no logging. The paid IP Geolocation API (geo.ipify.org), operated by WhoisXML API,
+  resolves an IP, domain, or email to a country/region/city, ISP, and Autonomous System (ASN) profile using
   credit-metered subscription plans.
 url: https://www.ipify.org/
 specificationVersion: '0.20'
@@ -25,9 +23,8 @@ tags:
 apis:
   - name: ipify Public IP Address API
     description: >-
-      Free, unauthenticated, unlimited public IP address lookup. Returns the
-      caller's IPv4 (api.ipify.org), IPv6 (api6.ipify.org), or dual-stack
-      (api64.ipify.org) address as plain text, JSON, or JSONP.
+      Free, unauthenticated, unlimited public IP address lookup. Returns the caller's IPv4 (api.ipify.org), IPv6
+      (api6.ipify.org), or dual-stack (api64.ipify.org) address as plain text, JSON, or JSONP.
     humanURL: https://www.ipify.org/
     baseURL: https://api.ipify.org
     tags:
@@ -45,8 +42,6 @@ apis:
         url: json-structure/ip-api-ip-response-structure.json
       - type: Example
         url: examples/ip-api-ip-response-example.json
-      - type: NaftikoCapability
-        url: capabilities/ip-api-ip-address.yaml
       - type: SourceCode
         title: ipify-api (Go server)
         url: https://github.com/rdegges/ipify-api
@@ -58,11 +53,9 @@ apis:
         url: https://github.com/rdegges/go-ipify
   - name: ipify IP Geolocation API
     description: >-
-      Paid, credit-metered IP geolocation API operated by WhoisXML API.
-      Resolves an IP, domain, or email to country/region/city, ISP, and AS
-      (ASN) profile. Country (1 credit), Country+City (2 credits), and
-      deprecated Country+City+VPN (3 credits) tiers. Authentication via
-      `apiKey` query parameter.
+      Paid, credit-metered IP geolocation API operated by WhoisXML API. Resolves an IP, domain, or email to
+      country/region/city, ISP, and AS (ASN) profile. Country (1 credit), Country+City (2 credits), and deprecated
+      Country+City+VPN (3 credits) tiers. Authentication via `apiKey` query parameter.
     humanURL: https://geo.ipify.org/
     baseURL: https://geo.ipify.org/api/v2
     tags:
@@ -94,10 +87,6 @@ apis:
       - type: Example
         title: Account Balance Example
         url: examples/geolocation-api-account-balance-example.json
-      - type: NaftikoCapability
-        url: capabilities/geolocation-api-geolocation.yaml
-      - type: NaftikoCapability
-        url: capabilities/geolocation-api-account.yaml
       - type: Pricing
         url: https://geo.ipify.org/pricing
       - type: Authentication
@@ -165,7 +154,9 @@ common:
       - name: Heroku
         description: Public IP API server (rdegges/ipify-api) is deployed on Heroku.
       - name: 20+ Community Client Libraries
-        description: Bash, C, Clojurescript, Crystal, Dart, Elixir, Go, Java, Kotlin, .NET, Node.js, Objective-C, PHP, Python, R, Rust, Swift, Xojo, and more.
+        description: >-
+          Bash, C, Clojurescript, Crystal, Dart, Elixir, Go, Java, Kotlin, .NET, Node.js, Objective-C, PHP, Python, R,
+          Rust, Swift, Xojo, and more.
   - type: Solutions
     data:
       - name: Free Public IP Lookup

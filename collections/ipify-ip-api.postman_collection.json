@@ -1,0 +1,124 @@
+{
+  "item": [
+    {
+      "id": "ef58c179-8f55-42ae-9252-f51d51d8f383",
+      "name": "IP Address",
+      "description": {
+        "content": "Operations that return the caller's public IP address.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "47bc2729-81c3-428c-b020-b196609d2315",
+          "name": "ipify Get Public IP Address",
+          "request": {
+            "name": "ipify Get Public IP Address",
+            "description": {
+              "content": "Return the caller's public IP address. Without query parameters the response body is plain text containing the IP. With `format=json` the response is a JSON object. With `format=jsonp` the response is a JSONP callback wrapper.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Response encoding. Omit for plain text. `json` for a JSON object. `jsonp` for a JSONP callback wrapper."
+                },
+                {
+                  "disabled": false,
+                  "key": "callback",
+                  "value": "callback",
+                  "description": "Custom JSONP callback function name. Only meaningful when `format=jsonp`. Defaults to `callback` if omitted."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "139eb786-1aae-4df1-b70e-c565cd6f3b39",
+              "name": "Caller's public IP address.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "callback",
+                      "value": "getip"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ip\": \"98.207.254.136\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ipify.org",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b71e4533-be1e-47ee-aeef-0314e9b0acdf",
+    "name": "ipify Public IP Address API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "ipify is a free, open source, unlimited IP address lookup service operated by Randall Degges. The API returns the requester's public IP address as plain text, JSON, or JSONP. There is no authentication, no rate limit, no logging, and the same endpoint family supports IPv4 (api.ipify.org), IPv6 (api6.ipify.org), and dual-stack (api64.ipify.org) callers.\n\nContact Support:\n Name: ipify",
+      "type": "text/plain"
+    }
+  }
+}
