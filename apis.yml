@@ -40,15 +40,15 @@ apis:
         url: json-schema/ip-api-ip-response-schema.json
       - type: JSONStructure
         url: json-structure/ip-api-ip-response-structure.json
-      - type: Example
+      - type: Examples
         url: examples/ip-api-ip-response-example.json
       - type: SourceCode
         title: ipify-api (Go server)
         url: https://github.com/rdegges/ipify-api
-      - type: SDK
+      - type: SDKs
         title: Python SDK
         url: https://github.com/rdegges/python-ipify
-      - type: SDK
+      - type: SDKs
         title: Go SDK
         url: https://github.com/rdegges/go-ipify
   - name: ipify IP Geolocation API
@@ -81,10 +81,10 @@ apis:
       - type: JSONStructure
         title: Account Balance Structure
         url: json-structure/geolocation-api-account-balance-structure.json
-      - type: Example
+      - type: Examples
         title: Geolocation Response Example
         url: examples/geolocation-api-geolocation-response-example.json
-      - type: Example
+      - type: Examples
         title: Account Balance Example
         url: examples/geolocation-api-account-balance-example.json
       - type: Pricing
@@ -105,7 +105,7 @@ common:
   - type: GitHubRepository
     title: go-ipify
     url: https://github.com/rdegges/go-ipify
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/ipify-context.jsonld
   - type: SpectralRules
     url: rules/ipify-rules.yml
