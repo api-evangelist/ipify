@@ -1,0 +1,26 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.ipify.org
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Feb  7 23:59:59 2027 GMT
+  hsts: false
+- host: api.ipify.org
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 26 03:07:45 2026 GMT
+  hsts: null
+- host: geo.ipify.org
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 26 03:07:45 2026 GMT
+  hsts: false
+domains:
+- domain: ipify.org
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine

@@ -92,6 +92,10 @@ apis:
       - type: Authentication
         url: https://geo.ipify.org/docs
 common:
+  - type: DomainSecurity
+    url: security/ipify-domain-security.yml
+  - type: Authentication
+    url: authentication/ipify-authentication.yml
   - type: Website
     url: https://www.ipify.org/
   - type: PublicAPIsListing

@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/ipify-geolocation-api.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: ApiKeyQuery
+  type: apiKey
+  in: query
+  parameter: apiKey
+  description: Personal API key issued by WhoisXML API for the ipify Geolocation product. Passed
+    as the `apiKey` query parameter on every request.
+  sources:
+  - openapi/ipify-geolocation-api.yml
