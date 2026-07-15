@@ -92,6 +92,8 @@ apis:
       - type: Authentication
         url: https://geo.ipify.org/docs
 common:
+  - type: AgenticAccess
+    url: agentic-access/ipify-agentic-access.yml
   - type: DomainSecurity
     url: security/ipify-domain-security.yml
   - type: Authentication
