@@ -1,0 +1,93 @@
+openapi: 3.0.3
+info:
+  title: ipify IP Geolocation Account API
+  description: The ipify IP Geolocation API (geo.ipify.org) is the commercial counterpart to the free public IP API. It is operated by WhoisXML API and resolves an IPv4 or IPv6 address — or a domain or email — into a geolocation, ISP, Autonomous System (ASN), and reverse-DNS profile. Authentication uses an API key passed as the `apiKey` query parameter. Plans are credit-metered (Country = 1 credit, Country+City = 2, Country+City+VPN = 3).
+  version: 2.0.0
+  contact:
+    name: ipify Geolocation API
+    url: https://geo.ipify.org/
+  license:
+    name: Commercial
+    url: https://geo.ipify.org/
+  x-generated-from: documentation
+  x-last-validated: '2026-05-29'
+servers:
+- url: https://geo.ipify.org/api/v2
+  description: Production IP Geolocation API.
+- url: https://geo.ipify.org
+  description: Account / service root for non-versioned utility endpoints.
+tags:
+- name: Account
+  description: Account balance and credit utilities.
+paths:
+  /service/account-balance:
+    servers:
+    - url: https://geo.ipify.org
+      description: Service utility endpoint root.
+    get:
+      operationId: getAccountBalance
+      summary: ipify Get Account Balance
+      description: Return the remaining credit balance on the API key for the IP Geolocation product line.
+      tags:
+      - Account
+      parameters:
+      - $ref: '#/components/parameters/ApiKey'
+      responses:
+        '200':
+          description: Current credit balance for the API key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountBalanceResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      security:
+      - ApiKeyQuery: []
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AccountBalanceResponse:
+      type: object
+      description: Remaining credit balance for the API key.
+      properties:
+        credits:
+          type: integer
+          format: int64
+          description: Remaining credits available for IP Geolocation requests.
+          example: 9876
+    ErrorResponse:
+      type: object
+      description: Generic error envelope returned for non-2xx responses.
+      properties:
+        messages:
+          type: string
+          description: Human-readable error message describing what went wrong.
+          example: Missing apiKey parameter.
+        code:
+          type: integer
+          description: Provider-specific numeric error code.
+          example: 401
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    ApiKey:
+      name: apiKey
+      in: query
+      required: true
+      description: Personal API key for the ipify Geolocation product.
+      schema:
+        type: string
+      example: at_DEMO_KEY_REDACTED
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: apiKey
+      description: Personal API key issued by WhoisXML API for the ipify Geolocation product. Passed as the `apiKey` query parameter on every request.

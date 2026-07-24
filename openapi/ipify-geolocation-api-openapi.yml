@@ -1,14 +1,8 @@
 openapi: 3.0.3
 info:
-  title: ipify IP Geolocation API
-  description: >-
-    The ipify IP Geolocation API (geo.ipify.org) is the commercial counterpart to
-    the free public IP API. It is operated by WhoisXML API and resolves an IPv4 or
-    IPv6 address — or a domain or email — into a geolocation, ISP, Autonomous System
-    (ASN), and reverse-DNS profile. Authentication uses an API key passed as the
-    `apiKey` query parameter. Plans are credit-metered (Country = 1 credit,
-    Country+City = 2, Country+City+VPN = 3).
-  version: '2.0.0'
+  title: ipify IP Account Geolocation API
+  description: The ipify IP Geolocation API (geo.ipify.org) is the commercial counterpart to the free public IP API. It is operated by WhoisXML API and resolves an IPv4 or IPv6 address — or a domain or email — into a geolocation, ISP, Autonomous System (ASN), and reverse-DNS profile. Authentication uses an API key passed as the `apiKey` query parameter. Plans are credit-metered (Country = 1 credit, Country+City = 2, Country+City+VPN = 3).
+  version: 2.0.0
   contact:
     name: ipify Geolocation API
     url: https://geo.ipify.org/
@@ -18,35 +12,31 @@ info:
   x-generated-from: documentation
   x-last-validated: '2026-05-29'
 servers:
-  - url: https://geo.ipify.org/api/v2
-    description: Production IP Geolocation API.
-  - url: https://geo.ipify.org
-    description: Account / service root for non-versioned utility endpoints.
+- url: https://geo.ipify.org/api/v2
+  description: Production IP Geolocation API.
+- url: https://geo.ipify.org
+  description: Account / service root for non-versioned utility endpoints.
 tags:
-  - name: Geolocation
-    description: Resolve an IP, domain, or email to a country, region, city, and ISP.
-  - name: Account
-    description: Account balance and credit utilities.
+- name: Geolocation
+  description: Resolve an IP, domain, or email to a country, region, city, and ISP.
 paths:
   /country:
     servers:
-      - url: https://geo.ipify.org/api/v2
-        description: Country-tier geolocation endpoint.
+    - url: https://geo.ipify.org/api/v2
+      description: Country-tier geolocation endpoint.
     get:
       operationId: getCountryLocation
       summary: ipify Get Country-Level Geolocation
-      description: >-
-        Look up an IP, domain, or email and return its country-level geolocation
-        and ISP. Costs 1 credit per successful request.
+      description: Look up an IP, domain, or email and return its country-level geolocation and ISP. Costs 1 credit per successful request.
       tags:
-        - Geolocation
+      - Geolocation
       parameters:
-        - $ref: '#/components/parameters/ApiKey'
-        - $ref: '#/components/parameters/IpAddress'
-        - $ref: '#/components/parameters/Domain'
-        - $ref: '#/components/parameters/Email'
-        - $ref: '#/components/parameters/ReverseIp'
-        - $ref: '#/components/parameters/EscapedUnicode'
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/IpAddress'
+      - $ref: '#/components/parameters/Domain'
+      - $ref: '#/components/parameters/Email'
+      - $ref: '#/components/parameters/ReverseIp'
+      - $ref: '#/components/parameters/EscapedUnicode'
       responses:
         '200':
           description: Geolocation payload (country level).
@@ -65,30 +55,27 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
       security:
-        - ApiKeyQuery: []
+      - ApiKeyQuery: []
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
   /country,city:
     servers:
-      - url: https://geo.ipify.org/api/v2
-        description: Country+City-tier geolocation endpoint.
+    - url: https://geo.ipify.org/api/v2
+      description: Country+City-tier geolocation endpoint.
     get:
       operationId: getCountryCityLocation
       summary: ipify Get Country and City Geolocation
-      description: >-
-        Look up an IP, domain, or email and return its full geolocation (country +
-        region + city + postal code + lat/lng + timezone) plus ISP and AS details.
-        Costs 2 credits per successful request.
+      description: Look up an IP, domain, or email and return its full geolocation (country + region + city + postal code + lat/lng + timezone) plus ISP and AS details. Costs 2 credits per successful request.
       tags:
-        - Geolocation
+      - Geolocation
       parameters:
-        - $ref: '#/components/parameters/ApiKey'
-        - $ref: '#/components/parameters/IpAddress'
-        - $ref: '#/components/parameters/Domain'
-        - $ref: '#/components/parameters/Email'
-        - $ref: '#/components/parameters/ReverseIp'
-        - $ref: '#/components/parameters/EscapedUnicode'
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/IpAddress'
+      - $ref: '#/components/parameters/Domain'
+      - $ref: '#/components/parameters/Email'
+      - $ref: '#/components/parameters/ReverseIp'
+      - $ref: '#/components/parameters/EscapedUnicode'
       responses:
         '200':
           description: Geolocation payload (country + city level).
@@ -107,30 +94,27 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
       security:
-        - ApiKeyQuery: []
+      - ApiKeyQuery: []
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
   /country,city,vpn:
     servers:
-      - url: https://geo.ipify.org/api/v2
-        description: Country+City+VPN-tier geolocation endpoint (deprecated proxy block).
+    - url: https://geo.ipify.org/api/v2
+      description: Country+City+VPN-tier geolocation endpoint (deprecated proxy block).
     get:
       operationId: getCountryCityVpnLocation
       summary: ipify Get Country, City, and VPN Geolocation
-      description: >-
-        Look up an IP, domain, or email and return full geolocation, ISP, AS, and a
-        VPN/proxy-detection block. The `proxy` field is deprecated and always
-        returns `false`. Costs 3 credits per successful request.
+      description: Look up an IP, domain, or email and return full geolocation, ISP, AS, and a VPN/proxy-detection block. The `proxy` field is deprecated and always returns `false`. Costs 3 credits per successful request.
       tags:
-        - Geolocation
+      - Geolocation
       parameters:
-        - $ref: '#/components/parameters/ApiKey'
-        - $ref: '#/components/parameters/IpAddress'
-        - $ref: '#/components/parameters/Domain'
-        - $ref: '#/components/parameters/Email'
-        - $ref: '#/components/parameters/ReverseIp'
-        - $ref: '#/components/parameters/EscapedUnicode'
+      - $ref: '#/components/parameters/ApiKey'
+      - $ref: '#/components/parameters/IpAddress'
+      - $ref: '#/components/parameters/Domain'
+      - $ref: '#/components/parameters/Email'
+      - $ref: '#/components/parameters/ReverseIp'
+      - $ref: '#/components/parameters/EscapedUnicode'
       responses:
         '200':
           description: Geolocation payload with deprecated VPN/proxy block.
@@ -149,130 +133,15 @@ paths:
         '429':
           $ref: '#/components/responses/TooManyRequests'
       security:
-        - ApiKeyQuery: []
+      - ApiKeyQuery: []
       deprecated: true
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
-  /service/account-balance:
-    servers:
-      - url: https://geo.ipify.org
-        description: Service utility endpoint root.
-    get:
-      operationId: getAccountBalance
-      summary: ipify Get Account Balance
-      description: >-
-        Return the remaining credit balance on the API key for the IP Geolocation
-        product line.
-      tags:
-        - Account
-      parameters:
-        - $ref: '#/components/parameters/ApiKey'
-      responses:
-        '200':
-          description: Current credit balance for the API key.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AccountBalanceResponse'
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-      security:
-        - ApiKeyQuery: []
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
 components:
-  securitySchemes:
-    ApiKeyQuery:
-      type: apiKey
-      in: query
-      name: apiKey
-      description: >-
-        Personal API key issued by WhoisXML API for the ipify Geolocation product.
-        Passed as the `apiKey` query parameter on every request.
-  parameters:
-    ApiKey:
-      name: apiKey
-      in: query
-      required: true
-      description: Personal API key for the ipify Geolocation product.
-      schema:
-        type: string
-      example: at_DEMO_KEY_REDACTED
-    IpAddress:
-      name: ipAddress
-      in: query
-      required: false
-      description: >-
-        IPv4 or IPv6 address to look up. Defaults to the requester's IP when
-        omitted and no `domain`/`email` is supplied.
-      schema:
-        type: string
-      example: 8.8.8.8
-    Domain:
-      name: domain
-      in: query
-      required: false
-      description: Domain name whose A/AAAA record should be resolved and looked up.
-      schema:
-        type: string
-        format: hostname
-      example: example.com
-    Email:
-      name: email
-      in: query
-      required: false
-      description: Email address whose MX server IP should be looked up.
-      schema:
-        type: string
-        format: email
-      example: user@example.com
-    ReverseIp:
-      name: reverseIp
-      in: query
-      required: false
-      description: When `1`, include up to five reverse-DNS associated domains in the response.
-      schema:
-        type: integer
-        enum:
-          - 0
-          - 1
-        default: 0
-      example: 1
-    EscapedUnicode:
-      name: escapedUnicode
-      in: query
-      required: false
-      description: When `1`, leave Unicode characters in escaped form rather than decoding them.
-      schema:
-        type: integer
-        enum:
-          - 0
-          - 1
-        default: 0
-      example: 0
   responses:
-    BadRequest:
-      description: Missing or invalid required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Forbidden:
       description: Insufficient credits or revoked API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: Invalid request parameter values.
       content:
         application/json:
           schema:
@@ -283,13 +152,31 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Invalid request parameter values.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Missing or invalid required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     GeolocationResponse:
       type: object
       description: Geolocation, ISP, and AS lookup result for an IP, domain, or email.
       required:
-        - ip
-        - location
+      - ip
+      - location
       properties:
         ip:
           type: string
@@ -310,34 +197,8 @@ components:
             type: string
             format: hostname
           example:
-            - dns.google
-            - 8.8.8.8.in-addr.arpa
-    GeolocationVpnResponse:
-      type: object
-      description: Geolocation result including the deprecated VPN/proxy block.
-      required:
-        - ip
-        - location
-      properties:
-        ip:
-          type: string
-          description: The resolved IPv4 or IPv6 address.
-          example: 8.8.8.8
-        isp:
-          type: string
-          description: ISP name.
-          example: Google LLC
-        location:
-          $ref: '#/components/schemas/Location'
-        as:
-          $ref: '#/components/schemas/AutonomousSystem'
-        domains:
-          type: array
-          items:
-            type: string
-            format: hostname
-        proxy:
-          $ref: '#/components/schemas/ProxyBlock'
+          - dns.google
+          - 8.8.8.8.in-addr.arpa
     Location:
       type: object
       description: Country + region + city + postal code + lat/lng + timezone block.
@@ -371,7 +232,7 @@ components:
         timezone:
           type: string
           description: UTC offset for the location, formatted like `+10:00`.
-          example: '-07:00'
+          example: -07:00
         geonameId:
           type: integer
           format: int64
@@ -416,15 +277,32 @@ components:
         tor:
           type: boolean
           example: false
-    AccountBalanceResponse:
+    GeolocationVpnResponse:
       type: object
-      description: Remaining credit balance for the API key.
+      description: Geolocation result including the deprecated VPN/proxy block.
+      required:
+      - ip
+      - location
       properties:
-        credits:
-          type: integer
-          format: int64
-          description: Remaining credits available for IP Geolocation requests.
-          example: 9876
+        ip:
+          type: string
+          description: The resolved IPv4 or IPv6 address.
+          example: 8.8.8.8
+        isp:
+          type: string
+          description: ISP name.
+          example: Google LLC
+        location:
+          $ref: '#/components/schemas/Location'
+        as:
+          $ref: '#/components/schemas/AutonomousSystem'
+        domains:
+          type: array
+          items:
+            type: string
+            format: hostname
+        proxy:
+          $ref: '#/components/schemas/ProxyBlock'
     ErrorResponse:
       type: object
       description: Generic error envelope returned for non-2xx responses.
@@ -437,3 +315,68 @@ components:
           type: integer
           description: Provider-specific numeric error code.
           example: 401
+  parameters:
+    ApiKey:
+      name: apiKey
+      in: query
+      required: true
+      description: Personal API key for the ipify Geolocation product.
+      schema:
+        type: string
+      example: at_DEMO_KEY_REDACTED
+    Domain:
+      name: domain
+      in: query
+      required: false
+      description: Domain name whose A/AAAA record should be resolved and looked up.
+      schema:
+        type: string
+        format: hostname
+      example: example.com
+    IpAddress:
+      name: ipAddress
+      in: query
+      required: false
+      description: IPv4 or IPv6 address to look up. Defaults to the requester's IP when omitted and no `domain`/`email` is supplied.
+      schema:
+        type: string
+      example: 8.8.8.8
+    Email:
+      name: email
+      in: query
+      required: false
+      description: Email address whose MX server IP should be looked up.
+      schema:
+        type: string
+        format: email
+      example: user@example.com
+    ReverseIp:
+      name: reverseIp
+      in: query
+      required: false
+      description: When `1`, include up to five reverse-DNS associated domains in the response.
+      schema:
+        type: integer
+        enum:
+        - 0
+        - 1
+        default: 0
+      example: 1
+    EscapedUnicode:
+      name: escapedUnicode
+      in: query
+      required: false
+      description: When `1`, leave Unicode characters in escaped form rather than decoding them.
+      schema:
+        type: integer
+        enum:
+        - 0
+        - 1
+        default: 0
+      example: 0
+  securitySchemes:
+    ApiKeyQuery:
+      type: apiKey
+      in: query
+      name: apiKey
+      description: Personal API key issued by WhoisXML API for the ipify Geolocation product. Passed as the `apiKey` query parameter on every request.
