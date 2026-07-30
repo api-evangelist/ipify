@@ -1,4 +1,18 @@
 aid: ipify
+accessModel:
+  pricing: freemium
+  onboarding: open
+  trial: true
+  try_now: true
+  public: true
+  label: Freemium (free trial) · Open access
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ipify.png
 name: ipify
 description: >-
   ipify operates two complementary IP APIs. The free Public IP Address API (api.ipify.org, api6.ipify.org,
@@ -21,76 +35,138 @@ tags:
   - IP Intelligence
   - Public APIs
 apis:
-  - name: ipify Public IP Address API
-    description: >-
-      Free, unauthenticated, unlimited public IP address lookup. Returns the caller's IPv4 (api.ipify.org), IPv6
-      (api6.ipify.org), or dual-stack (api64.ipify.org) address as plain text, JSON, or JSONP.
-    humanURL: https://www.ipify.org/
-    baseURL: https://api.ipify.org
-    tags:
-      - IP Address
-      - Public IP
-      - Development
-    properties:
-      - type: Documentation
-        url: https://www.ipify.org/
-      - type: OpenAPI
-        url: openapi/ipify-ip-api.yml
-      - type: JSONSchema
-        url: json-schema/ip-api-ip-response-schema.json
-      - type: JSONStructure
-        url: json-structure/ip-api-ip-response-structure.json
-      - type: Examples
-        url: examples/ip-api-ip-response-example.json
-      - type: SourceCode
-        title: ipify-api (Go server)
-        url: https://github.com/rdegges/ipify-api
-      - type: SDKs
-        title: Python SDK
-        url: https://github.com/rdegges/python-ipify
-      - type: SDKs
-        title: Go SDK
-        url: https://github.com/rdegges/go-ipify
-  - name: ipify IP Geolocation API
-    description: >-
-      Paid, credit-metered IP geolocation API operated by WhoisXML API. Resolves an IP, domain, or email to
-      country/region/city, ISP, and AS (ASN) profile. Country (1 credit), Country+City (2 credits), and deprecated
-      Country+City+VPN (3 credits) tiers. Authentication via `apiKey` query parameter.
-    humanURL: https://geo.ipify.org/
-    baseURL: https://geo.ipify.org/api/v2
-    tags:
-      - Geolocation
-      - IP Intelligence
-      - ASN
-    properties:
-      - type: Documentation
-        url: https://geo.ipify.org/docs
-      - type: APIReference
-        url: https://geo.ipify.org/docs
-      - type: OpenAPI
-        url: openapi/ipify-geolocation-api.yml
-      - type: JSONSchema
-        title: Geolocation Response Schema
-        url: json-schema/geolocation-api-geolocation-response-schema.json
-      - type: JSONSchema
-        title: Account Balance Schema
-        url: json-schema/geolocation-api-account-balance-schema.json
-      - type: JSONStructure
-        title: Geolocation Response Structure
-        url: json-structure/geolocation-api-geolocation-response-structure.json
-      - type: JSONStructure
-        title: Account Balance Structure
-        url: json-structure/geolocation-api-account-balance-structure.json
-      - type: Examples
-        title: Geolocation Response Example
-        url: examples/geolocation-api-geolocation-response-example.json
-      - type: Examples
-        title: Account Balance Example
-        url: examples/geolocation-api-account-balance-example.json
-      - type: Pricing
-        url: https://geo.ipify.org/pricing
-      - type: Authentication
-        url: https://geo.ipify.org/docs
+- aid: ipify:ipify-account-api
+  name: ipify Account API
+  description: Account balance and credit utilities.
+  humanURL: https://www.ipify.org/
+  baseURL: https://api.ipify.org
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/ipify-account-api-openapi.yml
+  - type: Documentation
+    url: https://www.ipify.org/
+  - type: JSONSchema
+    url: json-schema/ip-api-ip-response-schema.json
+  - type: JSONStructure
+    url: json-structure/ip-api-ip-response-structure.json
+  - type: Examples
+    url: examples/ip-api-ip-response-example.json
+  - type: SourceCode
+    url: https://github.com/rdegges/ipify-api
+  - type: SDKs
+    url: https://github.com/rdegges/python-ipify
+  - type: SDKs
+    url: https://github.com/rdegges/go-ipify
+  - type: Documentation
+    url: https://geo.ipify.org/docs
+  - type: APIReference
+    url: https://geo.ipify.org/docs
+  - type: JSONSchema
+    url: json-schema/geolocation-api-geolocation-response-schema.json
+  - type: JSONSchema
+    url: json-schema/geolocation-api-account-balance-schema.json
+  - type: JSONStructure
+    url: json-structure/geolocation-api-geolocation-response-structure.json
+  - type: JSONStructure
+    url: json-structure/geolocation-api-account-balance-structure.json
+  - type: Examples
+    url: examples/geolocation-api-geolocation-response-example.json
+  - type: Examples
+    url: examples/geolocation-api-account-balance-example.json
+  - type: Pricing
+    url: https://geo.ipify.org/pricing
+  - type: Authentication
+    url: https://geo.ipify.org/docs
+- aid: ipify:ipify-geolocation-api
+  name: ipify Geolocation API
+  description: Resolve an IP, domain, or email to a country, region, city, and ISP.
+  humanURL: https://www.ipify.org/
+  baseURL: https://api.ipify.org
+  tags:
+  - Geolocation
+  properties:
+  - type: OpenAPI
+    url: openapi/ipify-geolocation-api-openapi.yml
+  - type: Documentation
+    url: https://www.ipify.org/
+  - type: JSONSchema
+    url: json-schema/ip-api-ip-response-schema.json
+  - type: JSONStructure
+    url: json-structure/ip-api-ip-response-structure.json
+  - type: Examples
+    url: examples/ip-api-ip-response-example.json
+  - type: SourceCode
+    url: https://github.com/rdegges/ipify-api
+  - type: SDKs
+    url: https://github.com/rdegges/python-ipify
+  - type: SDKs
+    url: https://github.com/rdegges/go-ipify
+  - type: Documentation
+    url: https://geo.ipify.org/docs
+  - type: APIReference
+    url: https://geo.ipify.org/docs
+  - type: JSONSchema
+    url: json-schema/geolocation-api-geolocation-response-schema.json
+  - type: JSONSchema
+    url: json-schema/geolocation-api-account-balance-schema.json
+  - type: JSONStructure
+    url: json-structure/geolocation-api-geolocation-response-structure.json
+  - type: JSONStructure
+    url: json-structure/geolocation-api-account-balance-structure.json
+  - type: Examples
+    url: examples/geolocation-api-geolocation-response-example.json
+  - type: Examples
+    url: examples/geolocation-api-account-balance-example.json
+  - type: Pricing
+    url: https://geo.ipify.org/pricing
+  - type: Authentication
+    url: https://geo.ipify.org/docs
+- aid: ipify:ipify-ip-address-api
+  name: ipify IP Address API
+  description: Operations that return the caller's public IP address.
+  humanURL: https://www.ipify.org/
+  baseURL: https://api.ipify.org
+  tags:
+  - IP Address
+  properties:
+  - type: OpenAPI
+    url: openapi/ipify-ip-address-api-openapi.yml
+  - type: Documentation
+    url: https://www.ipify.org/
+  - type: JSONSchema
+    url: json-schema/ip-api-ip-response-schema.json
+  - type: JSONStructure
+    url: json-structure/ip-api-ip-response-structure.json
+  - type: Examples
+    url: examples/ip-api-ip-response-example.json
+  - type: SourceCode
+    url: https://github.com/rdegges/ipify-api
+  - type: SDKs
+    url: https://github.com/rdegges/python-ipify
+  - type: SDKs
+    url: https://github.com/rdegges/go-ipify
+  - type: Documentation
+    url: https://geo.ipify.org/docs
+  - type: APIReference
+    url: https://geo.ipify.org/docs
+  - type: JSONSchema
+    url: json-schema/geolocation-api-geolocation-response-schema.json
+  - type: JSONSchema
+    url: json-schema/geolocation-api-account-balance-schema.json
+  - type: JSONStructure
+    url: json-structure/geolocation-api-geolocation-response-structure.json
+  - type: JSONStructure
+    url: json-structure/geolocation-api-account-balance-structure.json
+  - type: Examples
+    url: examples/geolocation-api-geolocation-response-example.json
+  - type: Examples
+    url: examples/geolocation-api-account-balance-example.json
+  - type: Pricing
+    url: https://geo.ipify.org/pricing
+  - type: Authentication
+    url: https://geo.ipify.org/docs
 common:
   - type: AgenticAccess
     url: agentic-access/ipify-agentic-access.yml
