@@ -1,0 +1,18 @@
+{
+  "provider": "ipify",
+  "sources": [
+    "ipify-account-api-openapi.yml",
+    "ipify-geolocation-api-openapi.yml",
+    "ipify-ip-address-api-openapi.yml"
+  ],
+  "outputs": [
+    "ipify-account-api-openapi.yml",
+    "ipify-geolocation-api-openapi.yml",
+    "ipify-ip-address-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

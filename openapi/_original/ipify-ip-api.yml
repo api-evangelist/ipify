@@ -1,0 +1,94 @@
+openapi: 3.0.3
+info:
+  title: ipify Public IP Address API
+  description: >-
+    ipify is a free, open source, unlimited IP address lookup service operated by
+    Randall Degges. The API returns the requester's public IP address as plain text,
+    JSON, or JSONP. There is no authentication, no rate limit, no logging, and the
+    same endpoint family supports IPv4 (api.ipify.org), IPv6 (api6.ipify.org), and
+    dual-stack (api64.ipify.org) callers.
+  version: '1.0.0'
+  contact:
+    name: ipify
+    url: https://www.ipify.org/
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  x-generated-from: documentation
+  x-last-validated: '2026-05-29'
+servers:
+  - url: https://api.ipify.org
+    description: IPv4 endpoint — returns the caller's public IPv4 address.
+  - url: https://api6.ipify.org
+    description: IPv6 endpoint — returns the caller's public IPv6 address when called over an IPv6 transport.
+  - url: https://api64.ipify.org
+    description: Dual-stack endpoint — returns IPv4 or IPv6 depending on the transport the caller used.
+tags:
+  - name: IP Address
+    description: Operations that return the caller's public IP address.
+paths:
+  /:
+    get:
+      operationId: getPublicIp
+      summary: ipify Get Public IP Address
+      description: >-
+        Return the caller's public IP address. Without query parameters the response
+        body is plain text containing the IP. With `format=json` the response is a
+        JSON object. With `format=jsonp` the response is a JSONP callback wrapper.
+      tags:
+        - IP Address
+      parameters:
+        - name: format
+          in: query
+          required: false
+          description: >-
+            Response encoding. Omit for plain text. `json` for a JSON object. `jsonp`
+            for a JSONP callback wrapper.
+          schema:
+            type: string
+            enum:
+              - json
+              - jsonp
+          example: json
+        - name: callback
+          in: query
+          required: false
+          description: >-
+            Custom JSONP callback function name. Only meaningful when `format=jsonp`.
+            Defaults to `callback` if omitted.
+          schema:
+            type: string
+            default: callback
+          example: getip
+      responses:
+        '200':
+          description: Caller's public IP address.
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: Plain-text IP address (default response).
+                example: 98.207.254.136
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IpResponse'
+            application/javascript:
+              schema:
+                type: string
+                description: JSONP callback wrapping the IP response.
+                example: callback({"ip":"98.207.254.136"});
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    IpResponse:
+      type: object
+      description: JSON-encoded public IP response from ipify.
+      required:
+        - ip
+      properties:
+        ip:
+          type: string
+          description: The caller's public IP address as an IPv4 or IPv6 literal.
+          example: 98.207.254.136
