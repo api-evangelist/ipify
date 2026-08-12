@@ -168,6 +168,11 @@ apis:
   - type: Authentication
     url: https://geo.ipify.org/docs
 common:
+  - type: IssueTracker
+    url: https://github.com/rdegges/ipify-api/issues
+  - type: License
+    name: MIT
+    url: https://github.com/rdegges/ipify-api/blob/master/LICENSE
   - type: AgenticAccess
     url: agentic-access/ipify-agentic-access.yml
   - type: DomainSecurity
