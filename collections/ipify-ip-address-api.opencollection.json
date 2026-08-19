@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ipify IP Geolocation Account IP Address API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "IP Address",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ipify Get Public IP Address",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://geo.ipify.org/api/v2/",
+            "params": [
+              {
+                "name": "format",
+                "value": "json",
+                "type": "query",
+                "description": "Response encoding. Omit for plain text. `json` for a JSON object. `jsonp` for a JSONP callback wrapper."
+              },
+              {
+                "name": "callback",
+                "value": "getip",
+                "type": "query",
+                "description": "Custom JSONP callback function name. Only meaningful when `format=jsonp`. Defaults to `callback` if omitted."
+              }
+            ]
+          },
+          "docs": "Return the caller's public IP address. Without query parameters the response body is plain text containing the IP. With `format=json` the response is a JSON object. With `format=jsonp` the response is a JSONP callback wrapper."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "442a1200-33b6-4eab-b986-61496f5ff0e2",
+      "id": "232451a9-b87c-4871-bdc8-d23428b7cc30",
       "name": "Geolocation",
       "description": {
         "content": "Resolve an IP, domain, or email to a country, region, city, and ISP.",
@@ -9,7 +9,7 @@
       },
       "item": [
         {
-          "id": "1910f2fc-0cb0-46d3-bcd9-28630ca41c59",
+          "id": "278c2a01-eb5b-493f-99c4-7a2052eba17c",
           "name": "ipify Get Country-Level Geolocation",
           "request": {
             "name": "ipify Get Country-Level Geolocation",
@@ -91,7 +91,7 @@
           },
           "response": [
             {
-              "id": "874533ca-ec19-4ded-b247-15eb3a9811ea",
+              "id": "53f030da-4f5a-4b34-b8c3-f6e864b97f5e",
               "name": "Geolocation payload (country level).",
               "originalRequest": {
                 "url": {
@@ -155,7 +155,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "b9bf381e-9f49-4b8e-8343-bdf8c8b224c9",
+              "id": "660f326c-56c1-4c86-a47a-b80af3aad352",
               "name": "Missing or invalid required fields.",
               "originalRequest": {
                 "url": {
@@ -219,7 +219,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "0799386a-ba03-4abc-a19a-629ee356945e",
+              "id": "1a0aac65-4278-4ad9-8cb6-4997a24c4a99",
               "name": "Missing or invalid API key.",
               "originalRequest": {
                 "url": {
@@ -283,7 +283,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "b985eab6-e48a-4a52-a2d7-00b096e42f27",
+              "id": "9139e682-85a2-473f-a776-69ee3f282883",
               "name": "Insufficient credits or revoked API key.",
               "originalRequest": {
                 "url": {
@@ -347,7 +347,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "408d8732-bcc1-4965-abb2-f946e06116c7",
+              "id": "eb82011c-a23d-42b7-93b1-03bee2ff5e89",
               "name": "Invalid request parameter values.",
               "originalRequest": {
                 "url": {
@@ -411,7 +411,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "ef33beda-4e1c-46e5-b36d-6330dfb61897",
+              "id": "cfd39e66-51fa-4455-8684-e4483eaa34aa",
               "name": "Rate limit exceeded — the service caps callers at 100 requests per second.",
               "originalRequest": {
                 "url": {
@@ -481,7 +481,7 @@
           }
         },
         {
-          "id": "b4e0fc12-f8f1-4039-ac63-89a5028fea42",
+          "id": "29866d45-5f37-4413-b7ad-b431b87a6cbc",
           "name": "ipify Get Country and City Geolocation",
           "request": {
             "name": "ipify Get Country and City Geolocation",
@@ -563,7 +563,7 @@
           },
           "response": [
             {
-              "id": "6511cf8e-1fbf-4fc9-9727-c97c4d3762e2",
+              "id": "6146e7a2-2e48-499a-ac5f-ef6902b94f15",
               "name": "Geolocation payload (country + city level).",
               "originalRequest": {
                 "url": {
@@ -627,7 +627,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "c4cc5803-4986-4250-aa1a-a08dc9eba7fd",
+              "id": "c552701a-c461-4b82-89b8-8782fa3d0dda",
               "name": "Missing or invalid required fields.",
               "originalRequest": {
                 "url": {
@@ -691,7 +691,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "73277780-dcc6-42a1-a36f-0e858e4c52be",
+              "id": "2b0af001-e17c-4417-9698-d564c647795c",
               "name": "Missing or invalid API key.",
               "originalRequest": {
                 "url": {
@@ -755,7 +755,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "f137cb38-4d91-4d86-99bd-fcab29f22981",
+              "id": "8d7398c5-82e8-4d26-a2e4-eb0fc3126f82",
               "name": "Insufficient credits or revoked API key.",
               "originalRequest": {
                 "url": {
@@ -819,7 +819,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "aaa80a12-ddd0-4d48-9f1f-4ad5d9031d06",
+              "id": "54b3e053-ac26-4219-8096-a8d49dc82467",
               "name": "Invalid request parameter values.",
               "originalRequest": {
                 "url": {
@@ -883,7 +883,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "ca184d2f-fe82-4b32-a374-2549a242399a",
+              "id": "dfe51cc5-f7fc-4e74-9d92-624ee14cc623",
               "name": "Rate limit exceeded — the service caps callers at 100 requests per second.",
               "originalRequest": {
                 "url": {
@@ -953,7 +953,7 @@
           }
         },
         {
-          "id": "6f16305c-c7d1-4b3c-acb5-d612552a0b2d",
+          "id": "4077c23c-3945-464b-b31e-17885889ea2c",
           "name": "ipify Get Country, City, and VPN Geolocation",
           "request": {
             "name": "ipify Get Country, City, and VPN Geolocation",
@@ -1035,7 +1035,7 @@
           },
           "response": [
             {
-              "id": "46e39b2f-1d3b-4f94-930c-2b5fe6242e7e",
+              "id": "3a45f557-f2d6-4679-8647-358dabed3e18",
               "name": "Geolocation payload with deprecated VPN/proxy block.",
               "originalRequest": {
                 "url": {
@@ -1094,12 +1094,12 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"ip\": \"8.8.8.8\",\n  \"location\": {\n    \"country\": \"US\",\n    \"region\": \"California\",\n    \"city\": \"Mountain View\",\n    \"lat\": 37.40599,\n    \"lng\": -122.078514,\n    \"postalCode\": \"94043\",\n    \"timezone\": \"-07:00\",\n    \"geonameId\": 5375480\n  },\n  \"isp\": \"Google LLC\",\n  \"as\": {\n    \"asn\": 15169,\n    \"name\": \"GOOGLE\",\n    \"route\": \"8.8.8.0/24\",\n    \"domain\": \"https://about.google/\",\n    \"type\": \"Content\"\n  },\n  \"domains\": [\n    \"mgBgTn.bxw\",\n    \"GvviZMMQGNMzsEPoXDbRyfrgO.ghdb\"\n  ],\n  \"proxy\": {\n    \"proxy\": false,\n    \"vpn\": false,\n    \"tor\": false\n  }\n}",
+              "body": "{\n  \"ip\": \"8.8.8.8\",\n  \"location\": {\n    \"country\": \"US\",\n    \"region\": \"California\",\n    \"city\": \"Mountain View\",\n    \"lat\": 37.40599,\n    \"lng\": -122.078514,\n    \"postalCode\": \"94043\",\n    \"timezone\": \"-07:00\",\n    \"geonameId\": 5375480\n  },\n  \"isp\": \"Google LLC\",\n  \"as\": {\n    \"asn\": 15169,\n    \"name\": \"GOOGLE\",\n    \"route\": \"8.8.8.0/24\",\n    \"domain\": \"https://about.google/\",\n    \"type\": \"Content\"\n  },\n  \"domains\": [\n    \"fzdnGolcjMABPdpPWPTayDILvSLq.va\",\n    \"hoZPNLHxIgQHUfFCV.aebv\"\n  ],\n  \"proxy\": {\n    \"proxy\": false,\n    \"vpn\": false,\n    \"tor\": false\n  }\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "c04c45a6-228c-413e-846c-4fbfe09985d7",
+              "id": "703ef252-2c88-42f1-9247-f2389d1c5b16",
               "name": "Missing or invalid required fields.",
               "originalRequest": {
                 "url": {
@@ -1163,7 +1163,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "f0888320-4f89-4cd8-80f0-8a7e4657697f",
+              "id": "70774e38-145a-4331-b773-37021bb0e0a5",
               "name": "Missing or invalid API key.",
               "originalRequest": {
                 "url": {
@@ -1227,7 +1227,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "a82668cc-4357-4bdb-a18b-d4204136a0b5",
+              "id": "0eeb7a57-e367-44ab-ab47-c3241d6dd0fa",
               "name": "Insufficient credits or revoked API key.",
               "originalRequest": {
                 "url": {
@@ -1291,7 +1291,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "b771b8cd-8095-49d6-a14a-44e25b8546d7",
+              "id": "15ba82ad-6a38-4e28-94ce-6c227b7b41ba",
               "name": "Invalid request parameter values.",
               "originalRequest": {
                 "url": {
@@ -1355,7 +1355,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "c7440952-7a3d-442d-9c39-8455f5323f45",
+              "id": "6314721f-8166-43e4-9a08-671ceb618c7a",
               "name": "Rate limit exceeded — the service caps callers at 100 requests per second.",
               "originalRequest": {
                 "url": {
@@ -1426,166 +1426,6 @@
         }
       ],
       "event": []
-    },
-    {
-      "id": "1cdc6a3d-a2dc-4ff2-a9e7-aa5061270d9a",
-      "name": "Account",
-      "description": {
-        "content": "Account balance and credit utilities.",
-        "type": "text/plain"
-      },
-      "item": [
-        {
-          "id": "958fafe2-4952-4e25-a81f-54fb0a66268c",
-          "name": "ipify Get Account Balance",
-          "request": {
-            "name": "ipify Get Account Balance",
-            "description": {
-              "content": "Return the remaining credit balance on the API key for the IP Geolocation product line.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "service",
-                "account-balance"
-              ],
-              "host": [
-                "{{service-account-balance-Url}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "apiKey",
-                  "value": "<string>",
-                  "description": "(Required) Personal API key for the ipify Geolocation product."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "apikey",
-              "apikey": [
-                {
-                  "key": "key",
-                  "value": "apiKey"
-                },
-                {
-                  "key": "value",
-                  "value": "{{apiKey}}"
-                },
-                {
-                  "key": "in",
-                  "value": "query"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "ea6cfa35-3e0f-417a-82a5-2247762aca4e",
-              "name": "Current credit balance for the API key.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "service",
-                    "account-balance"
-                  ],
-                  "host": [
-                    "{{service-account-balance-Url}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "apiKey",
-                      "value": "at_DEMO_KEY_REDACTED"
-                    },
-                    {
-                      "key": "apiKey",
-                      "value": "<API Key>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"credits\": 9876\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0c7ab5f5-1660-48b5-a4dd-ab4e08355765",
-              "name": "Missing or invalid API key.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "service",
-                    "account-balance"
-                  ],
-                  "host": [
-                    "{{service-account-balance-Url}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "apiKey",
-                      "value": "at_DEMO_KEY_REDACTED"
-                    },
-                    {
-                      "key": "apiKey",
-                      "value": "<API Key>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"messages\": \"Missing apiKey parameter.\",\n  \"code\": 401\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        }
-      ],
-      "event": []
     }
   ],
   "event": [],
@@ -1609,16 +1449,11 @@
       "type": "string",
       "value": "https://geo.ipify.org/api/v2",
       "key": "country,city,vpn-Url"
-    },
-    {
-      "type": "string",
-      "value": "https://geo.ipify.org",
-      "key": "service-account-balance-Url"
     }
   ],
   "info": {
-    "_postman_id": "afaff446-cc56-4224-a4d8-4ae29afcade4",
-    "name": "ipify IP Geolocation API",
+    "_postman_id": "57ca6091-83e3-4201-862e-9284165125c8",
+    "name": "ipify IP Account Geolocation API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "The ipify IP Geolocation API (geo.ipify.org) is the commercial counterpart to the free public IP API. It is operated by WhoisXML API and resolves an IPv4 or IPv6 address — or a domain or email — into a geolocation, ISP, Autonomous System (ASN), and reverse-DNS profile. Authentication uses an API key passed as the `apiKey` query parameter. Plans are credit-metered (Country = 1 credit, Country+City = 2, Country+City+VPN = 3).\n\nContact Support:\n Name: ipify Geolocation API",

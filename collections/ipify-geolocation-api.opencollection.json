@@ -1,7 +1,7 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "ipify IP Geolocation API",
+    "name": "ipify IP Account Geolocation API",
     "version": "2.0.0"
   },
   "items": [
@@ -175,39 +175,6 @@
             }
           },
           "docs": "Look up an IP, domain, or email and return full geolocation, ISP, AS, and a VPN/proxy-detection block. The `proxy` field is deprecated and always returns `false`. Costs 3 credits per successful request."
-        }
-      ]
-    },
-    {
-      "info": {
-        "name": "Account",
-        "type": "folder"
-      },
-      "items": [
-        {
-          "info": {
-            "name": "ipify Get Account Balance",
-            "type": "http"
-          },
-          "http": {
-            "method": "GET",
-            "url": "https://geo.ipify.org/api/v2/service/account-balance",
-            "params": [
-              {
-                "name": "apiKey",
-                "value": "at_DEMO_KEY_REDACTED",
-                "type": "query",
-                "description": "Personal API key for the ipify Geolocation product."
-              }
-            ],
-            "auth": {
-              "type": "apikey",
-              "key": "apiKey",
-              "value": "{{apiKey}}",
-              "placement": "query"
-            }
-          },
-          "docs": "Return the remaining credit balance on the API key for the IP Geolocation product line."
         }
       ]
     }

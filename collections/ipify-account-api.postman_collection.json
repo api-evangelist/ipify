@@ -1,0 +1,186 @@
+{
+  "item": [
+    {
+      "id": "087521f0-f701-44fd-844d-fd6db88e3550",
+      "name": "Account",
+      "description": {
+        "content": "Account balance and credit utilities.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3a64d7a4-41e2-43f1-b6d0-13366dec4996",
+          "name": "ipify Get Account Balance",
+          "request": {
+            "name": "ipify Get Account Balance",
+            "description": {
+              "content": "Return the remaining credit balance on the API key for the IP Geolocation product line.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "service",
+                "account-balance"
+              ],
+              "host": [
+                "{{service-account-balance-Url}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "apiKey",
+                  "value": "<string>",
+                  "description": "(Required) Personal API key for the ipify Geolocation product."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "apiKey"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "query"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ee840640-c55f-4618-940d-13389c3ba3ab",
+              "name": "Current credit balance for the API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "account-balance"
+                  ],
+                  "host": [
+                    "{{service-account-balance-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "at_DEMO_KEY_REDACTED"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"credits\": 9876\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4bf584c-52d1-4683-bd35-578134853064",
+              "name": "Missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service",
+                    "account-balance"
+                  ],
+                  "host": [
+                    "{{service-account-balance-Url}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "apiKey",
+                      "value": "at_DEMO_KEY_REDACTED"
+                    },
+                    {
+                      "key": "apiKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"messages\": \"Missing apiKey parameter.\",\n  \"code\": 401\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://geo.ipify.org/api/v2",
+      "key": "baseUrl"
+    },
+    {
+      "type": "string",
+      "value": "https://geo.ipify.org",
+      "key": "service-account-balance-Url"
+    }
+  ],
+  "info": {
+    "_postman_id": "a4f047b2-0ac1-4c53-97f6-9c1ff8c71673",
+    "name": "ipify IP Geolocation Account API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ipify IP Geolocation API (geo.ipify.org) is the commercial counterpart to the free public IP API. It is operated by WhoisXML API and resolves an IPv4 or IPv6 address — or a domain or email — into a geolocation, ISP, Autonomous System (ASN), and reverse-DNS profile. Authentication uses an API key passed as the `apiKey` query parameter. Plans are credit-metered (Country = 1 credit, Country+City = 2, Country+City+VPN = 3).\n\nContact Support:\n Name: ipify Geolocation API",
+      "type": "text/plain"
+    }
+  }
+}

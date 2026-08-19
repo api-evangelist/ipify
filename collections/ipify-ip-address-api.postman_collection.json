@@ -1,0 +1,124 @@
+{
+  "item": [
+    {
+      "id": "1623867d-1fc9-4be8-903f-c1b3b6d76edf",
+      "name": "IP Address",
+      "description": {
+        "content": "Operations that return the caller's public IP address.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4270b0f4-049f-48c1-8cce-87b9a8d392af",
+          "name": "ipify Get Public IP Address",
+          "request": {
+            "name": "ipify Get Public IP Address",
+            "description": {
+              "content": "Return the caller's public IP address. Without query parameters the response body is plain text containing the IP. With `format=json` the response is a JSON object. With `format=jsonp` the response is a JSONP callback wrapper.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Response encoding. Omit for plain text. `json` for a JSON object. `jsonp` for a JSONP callback wrapper."
+                },
+                {
+                  "disabled": false,
+                  "key": "callback",
+                  "value": "callback",
+                  "description": "Custom JSONP callback function name. Only meaningful when `format=jsonp`. Defaults to `callback` if omitted."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "257c89be-a0b1-4cdb-86a3-6768ef0d9df4",
+              "name": "Caller's public IP address.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "callback",
+                      "value": "getip"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ip\": \"98.207.254.136\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://geo.ipify.org/api/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e4a8c60a-f7a2-4c61-b5d6-99acb39f1043",
+    "name": "ipify IP Geolocation Account IP Address API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The ipify IP Geolocation API (geo.ipify.org) is the commercial counterpart to the free public IP API. It is operated by WhoisXML API and resolves an IPv4 or IPv6 address — or a domain or email — into a geolocation, ISP, Autonomous System (ASN), and reverse-DNS profile. Authentication uses an API key passed as the `apiKey` query parameter. Plans are credit-metered (Country = 1 credit, Country+City = 2, Country+City+VPN = 3).\n\nContact Support:\n Name: ipify Geolocation API",
+      "type": "text/plain"
+    }
+  }
+}
