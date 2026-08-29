@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ipify IP Account Geolocation API
+  title: ipify IP Geolocation API
   description: The ipify IP Geolocation API (geo.ipify.org) is the commercial counterpart to the free public IP API. It is operated by WhoisXML API and resolves an IPv4 or IPv6 address — or a domain or email — into a geolocation, ISP, Autonomous System (ASN), and reverse-DNS profile. Authentication uses an API key passed as the `apiKey` query parameter. Plans are credit-metered (Country = 1 credit, Country+City = 2, Country+City+VPN = 3).
   version: 2.0.0
   contact:
@@ -140,14 +140,14 @@ paths:
         dispatcher: FALLBACK
 components:
   responses:
-    Forbidden:
-      description: Insufficient credits or revoked API key.
+    BadRequest:
+      description: Missing or invalid required fields.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    TooManyRequests:
-      description: Rate limit exceeded — the service caps callers at 100 requests per second.
+    Forbidden:
+      description: Insufficient credits or revoked API key.
       content:
         application/json:
           schema:
@@ -164,8 +164,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Missing or invalid required fields.
+    TooManyRequests:
+      description: Rate limit exceeded — the service caps callers at 100 requests per second.
       content:
         application/json:
           schema:
@@ -199,6 +199,57 @@ components:
           example:
           - dns.google
           - 8.8.8.8.in-addr.arpa
+    ProxyBlock:
+      type: object
+      deprecated: true
+      description: Deprecated proxy/VPN detection block — always returns `false`.
+      properties:
+        proxy:
+          type: boolean
+          example: false
+        vpn:
+          type: boolean
+          example: false
+        tor:
+          type: boolean
+          example: false
+    AutonomousSystem:
+      type: object
+      description: Autonomous System (AS) profile for the IP.
+      properties:
+        asn:
+          type: integer
+          format: int64
+          description: Autonomous System Number.
+          example: 15169
+        name:
+          type: string
+          description: AS organization name.
+          example: GOOGLE
+        route:
+          type: string
+          description: Announced route in CIDR notation.
+          example: 8.8.8.0/24
+        domain:
+          type: string
+          description: AS organization website.
+          example: https://about.google/
+        type:
+          type: string
+          description: AS classification (e.g. `Content`, `Hosting`, `ISP`).
+          example: Content
+    ErrorResponse:
+      type: object
+      description: Generic error envelope returned for non-2xx responses.
+      properties:
+        messages:
+          type: string
+          description: Human-readable error message describing what went wrong.
+          example: Missing apiKey parameter.
+        code:
+          type: integer
+          description: Provider-specific numeric error code.
+          example: 401
     Location:
       type: object
       description: Country + region + city + postal code + lat/lng + timezone block.
@@ -238,45 +289,6 @@ components:
           format: int64
           description: GeoNames database identifier for the location.
           example: 5375480
-    AutonomousSystem:
-      type: object
-      description: Autonomous System (AS) profile for the IP.
-      properties:
-        asn:
-          type: integer
-          format: int64
-          description: Autonomous System Number.
-          example: 15169
-        name:
-          type: string
-          description: AS organization name.
-          example: GOOGLE
-        route:
-          type: string
-          description: Announced route in CIDR notation.
-          example: 8.8.8.0/24
-        domain:
-          type: string
-          description: AS organization website.
-          example: https://about.google/
-        type:
-          type: string
-          description: AS classification (e.g. `Content`, `Hosting`, `ISP`).
-          example: Content
-    ProxyBlock:
-      type: object
-      deprecated: true
-      description: Deprecated proxy/VPN detection block — always returns `false`.
-      properties:
-        proxy:
-          type: boolean
-          example: false
-        vpn:
-          type: boolean
-          example: false
-        tor:
-          type: boolean
-          example: false
     GeolocationVpnResponse:
       type: object
       description: Geolocation result including the deprecated VPN/proxy block.
@@ -303,44 +315,7 @@ components:
             format: hostname
         proxy:
           $ref: '#/components/schemas/ProxyBlock'
-    ErrorResponse:
-      type: object
-      description: Generic error envelope returned for non-2xx responses.
-      properties:
-        messages:
-          type: string
-          description: Human-readable error message describing what went wrong.
-          example: Missing apiKey parameter.
-        code:
-          type: integer
-          description: Provider-specific numeric error code.
-          example: 401
   parameters:
-    ApiKey:
-      name: apiKey
-      in: query
-      required: true
-      description: Personal API key for the ipify Geolocation product.
-      schema:
-        type: string
-      example: at_DEMO_KEY_REDACTED
-    Domain:
-      name: domain
-      in: query
-      required: false
-      description: Domain name whose A/AAAA record should be resolved and looked up.
-      schema:
-        type: string
-        format: hostname
-      example: example.com
-    IpAddress:
-      name: ipAddress
-      in: query
-      required: false
-      description: IPv4 or IPv6 address to look up. Defaults to the requester's IP when omitted and no `domain`/`email` is supplied.
-      schema:
-        type: string
-      example: 8.8.8.8
     Email:
       name: email
       in: query
@@ -350,6 +325,22 @@ components:
         type: string
         format: email
       example: user@example.com
+    IpAddress:
+      name: ipAddress
+      in: query
+      required: false
+      description: IPv4 or IPv6 address to look up. Defaults to the requester's IP when omitted and no `domain`/`email` is supplied.
+      schema:
+        type: string
+      example: 8.8.8.8
+    ApiKey:
+      name: apiKey
+      in: query
+      required: true
+      description: Personal API key for the ipify Geolocation product.
+      schema:
+        type: string
+      example: at_DEMO_KEY_REDACTED
     ReverseIp:
       name: reverseIp
       in: query
@@ -362,6 +353,15 @@ components:
         - 1
         default: 0
       example: 1
+    Domain:
+      name: domain
+      in: query
+      required: false
+      description: Domain name whose A/AAAA record should be resolved and looked up.
+      schema:
+        type: string
+        format: hostname
+      example: example.com
     EscapedUnicode:
       name: escapedUnicode
       in: query

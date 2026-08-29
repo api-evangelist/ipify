@@ -1,21 +1,23 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: ipify IP Geolocation Account IP Address API
-  description: The ipify IP Geolocation API (geo.ipify.org) is the commercial counterpart to the free public IP API. It is operated by WhoisXML API and resolves an IPv4 or IPv6 address — or a domain or email — into a geolocation, ISP, Autonomous System (ASN), and reverse-DNS profile. Authentication uses an API key passed as the `apiKey` query parameter. Plans are credit-metered (Country = 1 credit, Country+City = 2, Country+City+VPN = 3).
-  version: 2.0.0
+  title: ipify Public IP Address API
+  description: ipify is a free, open source, unlimited IP address lookup service operated by Randall Degges. The API returns the requester's public IP address as plain text, JSON, or JSONP. There is no authentication, no rate limit, no logging, and the same endpoint family supports IPv4 (api.ipify.org), IPv6 (api6.ipify.org), and dual-stack (api64.ipify.org) callers.
+  version: 1.0.0
   contact:
-    name: ipify Geolocation API
-    url: https://geo.ipify.org/
+    name: ipify
+    url: https://www.ipify.org/
   license:
-    name: Commercial
-    url: https://geo.ipify.org/
+    name: MIT
+    url: https://opensource.org/licenses/MIT
   x-generated-from: documentation
   x-last-validated: '2026-05-29'
 servers:
-- url: https://geo.ipify.org/api/v2
-  description: Production IP Geolocation API.
-- url: https://geo.ipify.org
-  description: Account / service root for non-versioned utility endpoints.
+- url: https://api.ipify.org
+  description: IPv4 endpoint — returns the caller's public IPv4 address.
+- url: https://api6.ipify.org
+  description: IPv6 endpoint — returns the caller's public IPv6 address when called over an IPv6 transport.
+- url: https://api64.ipify.org
+  description: Dual-stack endpoint — returns IPv4 or IPv6 depending on the transport the caller used.
 tags:
 - name: IP Address
   description: Operations that return the caller's public IP address.
@@ -78,9 +80,3 @@ components:
           type: string
           description: The caller's public IP address as an IPv4 or IPv6 literal.
           example: 98.207.254.136
-  securitySchemes:
-    ApiKeyQuery:
-      type: apiKey
-      in: query
-      name: apiKey
-      description: Personal API key issued by WhoisXML API for the ipify Geolocation product. Passed as the `apiKey` query parameter on every request.

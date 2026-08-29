@@ -1,9 +1,8 @@
 {
   "provider": "ipify",
   "sources": [
-    "ipify-account-api-openapi.yml",
-    "ipify-geolocation-api-openapi.yml",
-    "ipify-ip-address-api-openapi.yml"
+    "_original/ipify-geolocation-api.yml",
+    "_original/ipify-ip-api.yml"
   ],
   "outputs": [
     "ipify-account-api-openapi.yml",
@@ -13,6 +12,14 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "ipify-geolocation-api.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "ipify-ip-api.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0"
+  ],
+  "skipped": [
+    "ipify-account-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ipify-geolocation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ipify-ip-address-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
