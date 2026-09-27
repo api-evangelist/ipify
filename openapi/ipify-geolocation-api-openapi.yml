@@ -140,6 +140,15 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
+    Email:
+      name: email
+      in: query
+      required: false
+      description: Email address whose MX server IP should be looked up.
+      schema:
+        type: string
+        format: email
+      example: user@example.com
     ReverseIp:
       name: reverseIp
       in: query
@@ -160,14 +169,6 @@ components:
       schema:
         type: string
       example: at_DEMO_KEY_REDACTED
-    IpAddress:
-      name: ipAddress
-      in: query
-      required: false
-      description: IPv4 or IPv6 address to look up. Defaults to the requester's IP when omitted and no `domain`/`email` is supplied.
-      schema:
-        type: string
-      example: 8.8.8.8
     EscapedUnicode:
       name: escapedUnicode
       in: query
@@ -180,15 +181,6 @@ components:
         - 1
         default: 0
       example: 0
-    Email:
-      name: email
-      in: query
-      required: false
-      description: Email address whose MX server IP should be looked up.
-      schema:
-        type: string
-        format: email
-      example: user@example.com
     Domain:
       name: domain
       in: query
@@ -198,50 +190,15 @@ components:
         type: string
         format: hostname
       example: example.com
-  responses:
-    TooManyRequests:
-      description: Rate limit exceeded — the service caps callers at 100 requests per second.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: Invalid request parameter values.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient credits or revoked API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Missing or invalid required fields.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    IpAddress:
+      name: ipAddress
+      in: query
+      required: false
+      description: IPv4 or IPv6 address to look up. Defaults to the requester's IP when omitted and no `domain`/`email` is supplied.
+      schema:
+        type: string
+      example: 8.8.8.8
   schemas:
-    ErrorResponse:
-      type: object
-      description: Generic error envelope returned for non-2xx responses.
-      properties:
-        messages:
-          type: string
-          description: Human-readable error message describing what went wrong.
-          example: Missing apiKey parameter.
-        code:
-          type: integer
-          description: Provider-specific numeric error code.
-          example: 401
     AutonomousSystem:
       type: object
       description: Autonomous System (AS) profile for the IP.
@@ -267,32 +224,20 @@ components:
           type: string
           description: AS classification (e.g. `Content`, `Hosting`, `ISP`).
           example: Content
-    GeolocationVpnResponse:
+    ProxyBlock:
       type: object
-      description: Geolocation result including the deprecated VPN/proxy block.
-      required:
-      - ip
-      - location
+      deprecated: true
+      description: Deprecated proxy/VPN detection block — always returns `false`.
       properties:
-        ip:
-          type: string
-          description: The resolved IPv4 or IPv6 address.
-          example: 8.8.8.8
-        isp:
-          type: string
-          description: ISP name.
-          example: Google LLC
-        location:
-          $ref: '#/components/schemas/Location'
-        as:
-          $ref: '#/components/schemas/AutonomousSystem'
-        domains:
-          type: array
-          items:
-            type: string
-            format: hostname
         proxy:
-          $ref: '#/components/schemas/ProxyBlock'
+          type: boolean
+          example: false
+        vpn:
+          type: boolean
+          example: false
+        tor:
+          type: boolean
+          example: false
     GeolocationResponse:
       type: object
       description: Geolocation, ISP, and AS lookup result for an IP, domain, or email.
@@ -321,6 +266,44 @@ components:
           example:
           - dns.google
           - 8.8.8.8.in-addr.arpa
+    GeolocationVpnResponse:
+      type: object
+      description: Geolocation result including the deprecated VPN/proxy block.
+      required:
+      - ip
+      - location
+      properties:
+        ip:
+          type: string
+          description: The resolved IPv4 or IPv6 address.
+          example: 8.8.8.8
+        isp:
+          type: string
+          description: ISP name.
+          example: Google LLC
+        location:
+          $ref: '#/components/schemas/Location'
+        as:
+          $ref: '#/components/schemas/AutonomousSystem'
+        domains:
+          type: array
+          items:
+            type: string
+            format: hostname
+        proxy:
+          $ref: '#/components/schemas/ProxyBlock'
+    ErrorResponse:
+      type: object
+      description: Generic error envelope returned for non-2xx responses.
+      properties:
+        messages:
+          type: string
+          description: Human-readable error message describing what went wrong.
+          example: Missing apiKey parameter.
+        code:
+          type: integer
+          description: Provider-specific numeric error code.
+          example: 401
     Location:
       type: object
       description: Country + region + city + postal code + lat/lng + timezone block.
@@ -360,20 +343,37 @@ components:
           format: int64
           description: GeoNames database identifier for the location.
           example: 5375480
-    ProxyBlock:
-      type: object
-      deprecated: true
-      description: Deprecated proxy/VPN detection block — always returns `false`.
-      properties:
-        proxy:
-          type: boolean
-          example: false
-        vpn:
-          type: boolean
-          example: false
-        tor:
-          type: boolean
-          example: false
+  responses:
+    BadRequest:
+      description: Missing or invalid required fields.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Insufficient credits or revoked API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    TooManyRequests:
+      description: Rate limit exceeded — the service caps callers at 100 requests per second.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Invalid request parameter values.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     ApiKeyQuery:
       type: apiKey
