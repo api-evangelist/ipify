@@ -139,105 +139,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    Email:
-      name: email
-      in: query
-      required: false
-      description: Email address whose MX server IP should be looked up.
-      schema:
-        type: string
-        format: email
-      example: user@example.com
-    ReverseIp:
-      name: reverseIp
-      in: query
-      required: false
-      description: When `1`, include up to five reverse-DNS associated domains in the response.
-      schema:
-        type: integer
-        enum:
-        - 0
-        - 1
-        default: 0
-      example: 1
-    ApiKey:
-      name: apiKey
-      in: query
-      required: true
-      description: Personal API key for the ipify Geolocation product.
-      schema:
-        type: string
-      example: at_DEMO_KEY_REDACTED
-    EscapedUnicode:
-      name: escapedUnicode
-      in: query
-      required: false
-      description: When `1`, leave Unicode characters in escaped form rather than decoding them.
-      schema:
-        type: integer
-        enum:
-        - 0
-        - 1
-        default: 0
-      example: 0
-    Domain:
-      name: domain
-      in: query
-      required: false
-      description: Domain name whose A/AAAA record should be resolved and looked up.
-      schema:
-        type: string
-        format: hostname
-      example: example.com
-    IpAddress:
-      name: ipAddress
-      in: query
-      required: false
-      description: IPv4 or IPv6 address to look up. Defaults to the requester's IP when omitted and no `domain`/`email` is supplied.
-      schema:
-        type: string
-      example: 8.8.8.8
   schemas:
-    AutonomousSystem:
-      type: object
-      description: Autonomous System (AS) profile for the IP.
-      properties:
-        asn:
-          type: integer
-          format: int64
-          description: Autonomous System Number.
-          example: 15169
-        name:
-          type: string
-          description: AS organization name.
-          example: GOOGLE
-        route:
-          type: string
-          description: Announced route in CIDR notation.
-          example: 8.8.8.0/24
-        domain:
-          type: string
-          description: AS organization website.
-          example: https://about.google/
-        type:
-          type: string
-          description: AS classification (e.g. `Content`, `Hosting`, `ISP`).
-          example: Content
-    ProxyBlock:
-      type: object
-      deprecated: true
-      description: Deprecated proxy/VPN detection block — always returns `false`.
-      properties:
-        proxy:
-          type: boolean
-          example: false
-        vpn:
-          type: boolean
-          example: false
-        tor:
-          type: boolean
-          example: false
     GeolocationResponse:
       type: object
       description: Geolocation, ISP, and AS lookup result for an IP, domain, or email.
@@ -266,44 +168,6 @@ components:
           example:
           - dns.google
           - 8.8.8.8.in-addr.arpa
-    GeolocationVpnResponse:
-      type: object
-      description: Geolocation result including the deprecated VPN/proxy block.
-      required:
-      - ip
-      - location
-      properties:
-        ip:
-          type: string
-          description: The resolved IPv4 or IPv6 address.
-          example: 8.8.8.8
-        isp:
-          type: string
-          description: ISP name.
-          example: Google LLC
-        location:
-          $ref: '#/components/schemas/Location'
-        as:
-          $ref: '#/components/schemas/AutonomousSystem'
-        domains:
-          type: array
-          items:
-            type: string
-            format: hostname
-        proxy:
-          $ref: '#/components/schemas/ProxyBlock'
-    ErrorResponse:
-      type: object
-      description: Generic error envelope returned for non-2xx responses.
-      properties:
-        messages:
-          type: string
-          description: Human-readable error message describing what went wrong.
-          example: Missing apiKey parameter.
-        code:
-          type: integer
-          description: Provider-specific numeric error code.
-          example: 401
     Location:
       type: object
       description: Country + region + city + postal code + lat/lng + timezone block.
@@ -343,9 +207,145 @@ components:
           format: int64
           description: GeoNames database identifier for the location.
           example: 5375480
+    AutonomousSystem:
+      type: object
+      description: Autonomous System (AS) profile for the IP.
+      properties:
+        asn:
+          type: integer
+          format: int64
+          description: Autonomous System Number.
+          example: 15169
+        name:
+          type: string
+          description: AS organization name.
+          example: GOOGLE
+        route:
+          type: string
+          description: Announced route in CIDR notation.
+          example: 8.8.8.0/24
+        domain:
+          type: string
+          description: AS organization website.
+          example: https://about.google/
+        type:
+          type: string
+          description: AS classification (e.g. `Content`, `Hosting`, `ISP`).
+          example: Content
+    ProxyBlock:
+      type: object
+      deprecated: true
+      description: Deprecated proxy/VPN detection block — always returns `false`.
+      properties:
+        proxy:
+          type: boolean
+          example: false
+        vpn:
+          type: boolean
+          example: false
+        tor:
+          type: boolean
+          example: false
+    GeolocationVpnResponse:
+      type: object
+      description: Geolocation result including the deprecated VPN/proxy block.
+      required:
+      - ip
+      - location
+      properties:
+        ip:
+          type: string
+          description: The resolved IPv4 or IPv6 address.
+          example: 8.8.8.8
+        isp:
+          type: string
+          description: ISP name.
+          example: Google LLC
+        location:
+          $ref: '#/components/schemas/Location'
+        as:
+          $ref: '#/components/schemas/AutonomousSystem'
+        domains:
+          type: array
+          items:
+            type: string
+            format: hostname
+        proxy:
+          $ref: '#/components/schemas/ProxyBlock'
+    ErrorResponse:
+      type: object
+      description: Generic error envelope returned for non-2xx responses.
+      properties:
+        messages:
+          type: string
+          description: Human-readable error message describing what went wrong.
+          example: Missing apiKey parameter.
+        code:
+          type: integer
+          description: Provider-specific numeric error code.
+          example: 401
+  parameters:
+    IpAddress:
+      name: ipAddress
+      in: query
+      required: false
+      description: IPv4 or IPv6 address to look up. Defaults to the requester's IP when omitted and no `domain`/`email` is supplied.
+      schema:
+        type: string
+      example: 8.8.8.8
+    ApiKey:
+      name: apiKey
+      in: query
+      required: true
+      description: Personal API key for the ipify Geolocation product.
+      schema:
+        type: string
+      example: at_DEMO_KEY_REDACTED
+    ReverseIp:
+      name: reverseIp
+      in: query
+      required: false
+      description: When `1`, include up to five reverse-DNS associated domains in the response.
+      schema:
+        type: integer
+        enum:
+        - 0
+        - 1
+        default: 0
+      example: 1
+    EscapedUnicode:
+      name: escapedUnicode
+      in: query
+      required: false
+      description: When `1`, leave Unicode characters in escaped form rather than decoding them.
+      schema:
+        type: integer
+        enum:
+        - 0
+        - 1
+        default: 0
+      example: 0
+    Domain:
+      name: domain
+      in: query
+      required: false
+      description: Domain name whose A/AAAA record should be resolved and looked up.
+      schema:
+        type: string
+        format: hostname
+      example: example.com
+    Email:
+      name: email
+      in: query
+      required: false
+      description: Email address whose MX server IP should be looked up.
+      schema:
+        type: string
+        format: email
+      example: user@example.com
   responses:
-    BadRequest:
-      description: Missing or invalid required fields.
+    Forbidden:
+      description: Insufficient credits or revoked API key.
       content:
         application/json:
           schema:
@@ -356,8 +356,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Insufficient credits or revoked API key.
+    BadRequest:
+      description: Missing or invalid required fields.
       content:
         application/json:
           schema:
