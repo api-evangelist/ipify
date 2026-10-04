@@ -48,6 +48,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    AccountBalanceResponse:
+      type: object
+      description: Remaining credit balance for the API key.
+      properties:
+        credits:
+          type: integer
+          format: int64
+          description: Remaining credits available for IP Geolocation requests.
+          example: 9876
     ErrorResponse:
       type: object
       description: Generic error envelope returned for non-2xx responses.
@@ -60,22 +69,6 @@ components:
           type: integer
           description: Provider-specific numeric error code.
           example: 401
-    AccountBalanceResponse:
-      type: object
-      description: Remaining credit balance for the API key.
-      properties:
-        credits:
-          type: integer
-          format: int64
-          description: Remaining credits available for IP Geolocation requests.
-          example: 9876
-  responses:
-    Unauthorized:
-      description: Missing or invalid API key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     ApiKey:
       name: apiKey
@@ -85,6 +78,13 @@ components:
       schema:
         type: string
       example: at_DEMO_KEY_REDACTED
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     ApiKeyQuery:
       type: apiKey
