@@ -1,4 +1,4 @@
-# ipify (ipify)
+# ipify
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,97 +66,160 @@
 
 ipify operates two complementary IP APIs. The free Public IP Address API (api.ipify.org, api6.ipify.org, api64.ipify.org) returns the caller's public IPv4, IPv6, or dual-stack address as plain text, JSON, or JSONP — with no authentication, no rate limit, and no logging. The paid IP Geolocation API (geo.ipify.org), operated by WhoisXML API, resolves an IP, domain, or email to a country/region/city, ISP, and Autonomous System (ASN) profile using credit-metered subscription plans.
 
-**APIs.json:** [https://www.ipify.org/](https://www.ipify.org/)
+**Areas:** Development · IP Address · Geolocation · IP Intelligence · Public APIs
 
-## Tags
+## ipify on APIs.io
 
-- Development
-- IP Address
-- Geolocation
-- IP Intelligence
-- Public APIs
+Everything profiled for ipify is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/ipify/](https://apis.io/providers/ipify/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (3)
 
-- **Created:** 2026-05-28
-- **Modified:** 2026-05-29
+- [ipify Account API](https://apis.io/apis/ipify/ipify-account-api/) — Account balance and credit utilities.
+- [ipify Geolocation API](https://apis.io/apis/ipify/ipify-geolocation-api/) — Resolve an IP, domain, or email to a country, region, city, and ISP.
+- [ipify IP Address API](https://apis.io/apis/ipify/ipify-ip-address-api/) — Operations that return the caller's public IP address.
 
-## APIs
+### Published properties
 
-### ipify Public IP Address API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Free, unauthenticated, unlimited public IP address lookup. Returns the caller's IPv4 (api.ipify.org), IPv6 (api6.ipify.org), or dual-stack (api64.ipify.org) address as plain text, JSON, or JSONP.
+#### Agentic access (1)
 
-- **Human URL:** [https://www.ipify.org/](https://www.ipify.org/)
-- **Base URL:** `https://api.ipify.org`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Ipify Agentic Access](https://apis.io/agentic-access/ipify/ipify-agentic-access/)
 
-- IP Address
-- Public IP
-- Development
+#### JSON Schema (3)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://www.ipify.org/)
-- [OpenAPI](openapi/ipify-ip-api.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/ipify-ip-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ipify-ip-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/ip-api-ip-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/ip-api-ip-response-structure.json)
-- [Example](examples/ip-api-ip-response-example.json)
-- [Source Code](https://github.com/rdegges/ipify-api)
-- [SDK](https://github.com/rdegges/python-ipify)
-- [SDK](https://github.com/rdegges/go-ipify)
+- [AccountBalanceResponse](https://apis.io/schemas/ipify/geolocation-api-account-balance/)
+- [GeolocationResponse](https://apis.io/schemas/ipify/geolocation-api-geolocation-response/)
+- [IpResponse](https://apis.io/schemas/ipify/ip-api-ip-response/)
 
-### ipify IP Geolocation API
+#### JSON Structure (3)
 
-Paid, credit-metered IP geolocation API operated by WhoisXML API. Resolves an IP, domain, or email to country/region/city, ISP, and AS (ASN) profile. Country (1 credit), Country+City (2 credits), and deprecated Country+City+VPN (3 credits) tiers. Authentication via `apiKey` query parameter.
+Data models expressed in JSON Structure.
 
-- **Human URL:** [https://geo.ipify.org/](https://geo.ipify.org/)
-- **Base URL:** `https://geo.ipify.org/api/v2`
+- [Geolocation Api Account Balance Structure](https://apis.io/json-structure/ipify/geolocation-api-account-balance-structure/)
+- [Geolocation Api Geolocation Response Structure](https://apis.io/json-structure/ipify/geolocation-api-geolocation-response-structure/)
+- [Ip Api Ip Response Structure](https://apis.io/json-structure/ipify/ip-api-ip-response-structure/)
 
-#### Tags
+#### JSON-LD (1)
 
-- Geolocation
-- IP Intelligence
-- ASN
+Linked-data contexts for the provider's vocabulary.
 
-#### Properties
+- [Ipify Context](https://apis.io/jsonld/ipify/ipify-context/)
 
-- [Documentation](https://geo.ipify.org/docs)
-- [API Reference](https://geo.ipify.org/docs)
-- [OpenAPI](openapi/ipify-geolocation-api.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/ipify-geolocation-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ipify-geolocation-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/geolocation-api-geolocation-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/geolocation-api-account-balance-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/geolocation-api-geolocation-response-structure.json)
-- [JSON Structure](json-structure/geolocation-api-account-balance-structure.json)
-- [Example](examples/geolocation-api-geolocation-response-example.json)
-- [Example](examples/geolocation-api-account-balance-example.json)
-- [Pricing](https://geo.ipify.org/pricing)
-- [Authentication](https://geo.ipify.org/docs)
+#### Vocabulary (1)
 
-## Common Properties
+The provider's domain terms, defined.
+
+- [Ipify Vocabulary](https://apis.io/vocabularies/ipify/ipify-vocabulary/)
+
+#### Examples (3)
+
+Example requests and responses.
+
+- [Geolocation Api Account Balance Example](https://apis.io/examples/ipify/geolocation-api-account-balance-example/)
+- [Geolocation Api Geolocation Response Example](https://apis.io/examples/ipify/geolocation-api-geolocation-response-example/)
+- [Ip Api Ip Response Example](https://apis.io/examples/ipify/ip-api-ip-response-example/)
+
+#### Collections (4)
+
+Postman and Open Collection request collections.
+
+- [ipify IP Geolocation Account API](https://apis.io/collections/ipify/open-ipify-account-api/)
+- [ipify IP Account Geolocation API](https://apis.io/collections/ipify/open-ipify-geolocation-api/)
+- [ipify IP Geolocation Account IP Address API](https://apis.io/collections/ipify/open-ipify-ip-address-api/)
+- [ipify Public IP Address API](https://apis.io/collections/ipify/open-ipify-ip-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [ipify — jsonschema rules](https://apis.io/rules/ipify/ipify-jsonschema-spectral-rules/)
+- [ipify API Rules](https://apis.io/rules/ipify/ipify-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Ipify Authentication](https://apis.io/security/ipify/ipify-authentication/)
+- [Ipify Domain Security](https://apis.io/security/ipify/ipify-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Ipify Plans Pricing](https://apis.io/plans/ipify/ipify-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Ipify Rate Limits](https://apis.io/rate-limits/ipify/ipify-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Ipify Finops](https://apis.io/finops/ipify/ipify-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.ipify.org/)
-- [Public APIs Listing](https://github.com/public-apis/public-apis)
-- [GitHub Repository](https://github.com/rdegges/ipify-api)
-- [GitHub Repository](https://github.com/rdegges/python-ipify)
-- [GitHub Repository](https://github.com/rdegges/go-ipify)
-- [J S O N- L D](json-ld/ipify-context.jsonld)
-- [Spectral Rules](rules/ipify-rules.yml)
-- [Vocabulary](vocabulary/ipify-vocabulary.yml)
-- [Plans](plans/ipify-plans-pricing.yml)
-- [Rate Limits](rate-limits/ipify-rate-limits.yml)
-- [Fin Ops](finops/ipify-finops.yml)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
-- [Solutions](undefined)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 31.4** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 30.0 |
+| Contract governance | 27.3 |
+| Operational transparency | 13.2 |
+| Developer ergonomics | 35.7 |
+| Access clarity | 18.4 |
+
+**Agent readiness 23.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/ipify/](https://apis.io/providers/ipify/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for ipify: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/ipify/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
